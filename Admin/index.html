@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Ameza Fashion</title>
+    <!-- Line Awesome Icons -->
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="css/admin.css">
+    <!-- Tambahkan style untuk loading dan perbaikan sidebar -->
+<style>
+  /* Perbaikan untuk loading */
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #000;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Perbaikan untuk sidebar collapsed */
+  .sidebar.collapsed .logo a {
+    font-size: 0;
+  }
+  
+  .sidebar.collapsed .logo {
+    justify-content: center;
+  }
+  
+  /* Perbaikan untuk background */
+  body {
+    background-color: #f5f5f5;
+  }
+  
+  .main-content {
+    background-color: #f5f5f5;
+  }
+  
+  /* Perbaikan untuk mengurangi kedipan */
+  .page-content {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .page-content.active {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <a href="index.html">Ameza<span>.</span></a>
+                </div>
+                <button class="sidebar-toggle">
+                    <i class="las la-bars"></i>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active">
+                        <a href="#" data-page="dashboard">
+                            <i class="las la-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" data-page="products">
+                            <i class="las la-box"></i>
+                            <span>Produk</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" data-page="articles">
+                            <i class="las la-newspaper"></i>
+                            <span>Artikel</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" data-page="transactions">
+                            <i class="las la-credit-card"></i>
+                            <span>Transaksi</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" data-page="customers">
+                            <i class="las la-users"></i>
+                            <span>Pelanggan</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" data-page="users">
+                            <i class="las la-user-shield"></i>
+                            <span>Pengguna</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" data-page="settings">
+                            <i class="las la-cog"></i>
+                            <span>Pengaturan</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="btn-logout" id="logoutBtn">
+                    <i class="las la-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="content-header">
+                <div class="header-left">
+                    <button class="mobile-toggle">
+                        <i class="las la-bars"></i>
+                    </button>
+                    <h1 id="page-title">Dashboard</h1>
+                </div>
+                <div class="user-info">
+                    <span id="userName">Admin User</span>
+                    <img src="../images/avatar.jpg" alt="User Avatar" class="avatar">
+                    <div class="user-dropdown">
+                        <ul>
+                            <li><a href="#" id="editProfileBtn"><i class="las la-user"></i> Edit Profil</a></li>
+                            <li><a href="#"><i class="las la-cog"></i> Pengaturan</a></li>
+                            <li><a href="#" id="logoutBtnDropdown"><i class="las la-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="content-body">
+                <div id="dashboard-page" class="page-content active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="las la-box"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="total-products">0</h3>
+                                <p>Total Produk</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="las la-newspaper"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="total-articles">0</h3>
+                                <p>Total Artikel</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="las la-credit-card"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="total-transactions">0</h3>
+                                <p>Total Transaksi</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="las la-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="total-customers">0</h3>
+                                <p>Total Pelanggan</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-charts">
+                        <div class="chart-card">
+                            <h3>Penjualan Mingguan</h3>
+                            <div class="chart-placeholder">
+                                <i class="las la-chart-line"></i>
+                                <p>Grafik Penjualan</p>
+                            </div>
+                        </div>
+                        <div class="recent-orders">
+                            <h3>Transaksi Terbaru</h3>
+                            <div class="orders-list" id="recent-transactions-list">
+                                <!-- Recent transactions will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Management -->
+                <div id="products-page" class="page-content">
+                    <div class="page-header">
+                        <h2>Kelola Produk</h2>
+                        <button class="btn btn-primary" id="add-product-btn">
+                            <i class="las la-plus"></i>
+                            Tambah Produk
+                        </button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Gambar</th>
+                                    <th>Nama Produk</th>
+                                    <th>Kategori</th>
+                                    <th>Harga</th>
+                                    <th>Diskon</th>
+                                    <th>Stok</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="products-table-body">
+                                <!-- Products will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Articles Management -->
+                <div id="articles-page" class="page-content">
+                    <div class="page-header">
+                        <h2>Kelola Artikel</h2>
+                        <button class="btn btn-primary" id="add-article-btn">
+                            <i class="las la-plus"></i>
+                            Tambah Artikel
+                        </button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Gambar</th>
+                                    <th>Judul</th>
+                                    <th>Tanggal</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="articles-table-body">
+                                <!-- Articles will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Transactions Management -->
+                <div id="transactions-page" class="page-content">
+                    <div class="page-header">
+                        <h2>Kelola Transaksi</h2>
+                        <button class="btn btn-primary" id="add-transaction-btn">
+                            <i class="las la-plus"></i>
+                            Tambah Transaksi
+                        </button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID Transaksi</th>
+                                    <th>Pelanggan</th>
+                                    <th>Produk</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Tanggal</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactions-table-body">
+                                <!-- Transactions will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Users Management -->
+                <div id="users-page" class="page-content">
+                    <div class="page-header">
+                        <h2>Kelola Pengguna</h2>
+                        <button class="btn btn-primary" id="add-user-btn">
+                            <i class="las la-plus"></i>
+                            Tambah Pengguna
+                        </button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Email</th>
+                                    <th>Telepon</th>
+                                    <th>Role</th>
+                                    <th>Tanggal Daftar</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                                <!-- Users will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Customers Page -->
+                <div id="customers-page" class="page-content">
+                    <div class="page-header">
+                        <h2>Kelola Pelanggan</h2>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Email</th>
+                                    <th>Telepon</th>
+                                    <th>Total Pesanan</th>
+                                    <th>Bergabung</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customers-table-body">
+                                <!-- Customers will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Settings Page -->
+                <div id="settings-page" class="page-content">
+                    <div class="page-header">
+                        <h2>Pengaturan</h2>
+                    </div>
+                    <div class="settings-content">
+                        <div class="settings-card">
+                            <h3>Pengaturan Umum</h3>
+                            <p>Konfigurasi pengaturan dasar aplikasi</p>
+                        </div>
+                        <div class="settings-card">
+                            <h3>Pengaturan Email</h3>
+                            <p>Konfigurasi pengaturan email dan notifikasi</p>
+                        </div>
+                        <div class="settings-card">
+                            <h3>Pengaturan Pembayaran</h3>
+                            <p>Konfigurasi metode pembayaran</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Product Modal -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="product-modal-title">Tambah Produk</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="product-form">
+                <div class="form-group">
+                    <label for="product-name">Nama Produk</label>
+                    <input type="text" id="product-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-category">Kategori</label>
+                    <select id="product-category" required>
+                        <option value="">Pilih Kategori</option>
+                        <option value="tops">Atasan</option>
+                        <option value="bottoms">Bawahan</option>
+                        <option value="dresses">Dress</option>
+                        <option value="outerwear">Outerwear</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="product-price">Harga (Rp)</label>
+                    <input type="number" id="product-price" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-original-price">Harga Asli (Rp)</label>
+                    <input type="number" id="product-original-price">
+                </div>
+                <div class="form-group">
+                    <label for="product-discount">Diskon (%)</label>
+                    <input type="number" id="product-discount" min="0" max="100">
+                </div>
+                <div class="form-group">
+                    <label for="product-stock">Stok</label>
+                    <input type="number" id="product-stock" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-image">URL Gambar</label>
+                    <input type="url" id="product-image" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-sizes">Ukuran (pisahkan dengan koma)</label>
+                    <input type="text" id="product-sizes" placeholder="S,M,L,XL">
+                </div>
+                <div class="form-group">
+                    <label for="product-colors">Warna (pisahkan dengan koma)</label>
+                    <input type="text" id="product-colors" placeholder="hitam,putih,merah">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-product">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Article Modal -->
+    <div id="article-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="article-modal-title">Tambah Artikel</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="article-form">
+                <div class="form-group">
+                    <label for="article-title">Judul</label>
+                    <input type="text" id="article-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="article-content">Konten</label>
+                    <textarea id="article-content" rows="5" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="article-image">URL Gambar</label>
+                    <input type="url" id="article-image" required>
+                </div>
+                <div class="form-group">
+                    <label for="article-date">Tanggal</label>
+                    <input type="date" id="article-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="article-status">Status</label>
+                    <select id="article-status" required>
+                        <option value="published">Dipublikasi</option>
+                        <option value="draft">Draft</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-article">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Transaction Modal -->
+    <div id="transaction-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="transaction-modal-title">Tambah Transaksi</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="transaction-form">
+                <div class="form-group">
+                    <label for="transaction-id">ID Transaksi</label>
+                    <input type="text" id="transaction-id" required placeholder="TRX001">
+                </div>
+                <div class="form-group">
+                    <label for="transaction-customer">Nama Pelanggan</label>
+                    <input type="text" id="transaction-customer" required>
+                </div>
+                <div class="form-group">
+                    <label for="transaction-customer-email">Email Pelanggan</label>
+                    <input type="email" id="transaction-customer-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="transaction-customer-phone">Telepon Pelanggan</label>
+                    <input type="tel" id="transaction-customer-phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="transaction-products">Produk (pisahkan dengan koma)</label>
+                    <input type="text" id="transaction-products" required placeholder="Blouse Elegant, Rok Putih">
+                </div>
+                <div class="form-group">
+                    <label for="transaction-quantity">Jumlah</label>
+                    <input type="number" id="transaction-quantity" required min="1" value="1">
+                </div>
+                <div class="form-group">
+                    <label for="transaction-total">Total (Rp)</label>
+                    <input type="number" id="transaction-total" required>
+                </div>
+                <div class="form-group">
+                    <label for="transaction-payment-method">Metode Pembayaran</label>
+                    <select id="transaction-payment-method" required>
+                        <option value="">Pilih Metode</option>
+                        <option value="transfer">Transfer Bank</option>
+                        <option value="ewallet">E-Wallet</option>
+                        <option value="cod">Cash on Delivery</option>
+                        <option value="credit_card">Kartu Kredit</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transaction-status">Status</label>
+                    <select id="transaction-status" required>
+                        <option value="pending">Menunggu Pembayaran</option>
+                        <option value="paid">Sudah Dibayar</option>
+                        <option value="processing">Sedang Diproses</option>
+                        <option value="shipped">Dikirim</option>
+                        <option value="delivered">Terkirim</option>
+                        <option value="completed">Selesai</option>
+                        <option value="cancelled">Dibatalkan</option>
+                        <option value="refunded">Dikembalikan</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transaction-date">Tanggal Transaksi</label>
+                    <input type="date" id="transaction-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="transaction-address">Alamat Pengiriman</label>
+                    <textarea id="transaction-address" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="transaction-notes">Catatan</label>
+                    <textarea id="transaction-notes" rows="2" placeholder="Catatan tambahan (opsional)"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-transaction">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- User Modal -->
+    <div id="user-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="user-modal-title">Tambah Pengguna</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="user-form">
+                <div class="form-group">
+                    <label for="user-firstName">Nama Depan</label>
+                    <input type="text" id="user-firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="user-lastName">Nama Belakang</label>
+                    <input type="text" id="user-lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="user-email">Email</label>
+                    <input type="email" id="user-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="user-phone">Telepon</label>
+                    <input type="tel" id="user-phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="user-password">Password</label>
+                    <input type="password" id="user-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="user-role">Role</label>
+                    <select id="user-role" required>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-user">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Profile Modal -->
+    <div id="admin-profile-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Profil Admin</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="admin-profile-form">
+                <div class="form-group">
+                    <label for="admin-firstName">Nama Depan</label>
+                    <input type="text" id="admin-firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="admin-lastName">Nama Belakang</label>
+                    <input type="text" id="admin-lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="admin-email">Email</label>
+                    <input type="email" id="admin-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="admin-phone">Telepon</label>
+                    <input type="tel" id="admin-phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="admin-avatar">URL Avatar</label>
+                    <input type="url" id="admin-avatar" placeholder="https://example.com/avatar.jpg">
+                </div>
+                <div class="form-group">
+                    <label for="admin-bio">Bio</label>
+                    <textarea id="admin-bio" rows="3" placeholder="Ceritakan tentang diri Anda..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="admin-current-password">Password Saat Ini</label>
+                    <input type="password" id="admin-current-password" placeholder="Kosongkan jika tidak ingin mengubah">
+                </div>
+                <div class="form-group">
+                    <label for="admin-new-password">Password Baru</label>
+                    <input type="password" id="admin-new-password" placeholder="Kosongkan jika tidak ingin mengubah">
+                </div>
+                <div class="form-group">
+                    <label for="admin-confirm-password">Konfirmasi Password Baru</label>
+                    <input type="password" id="admin-confirm-password" placeholder="Kosongkan jika tidak ingin mengubah">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-admin-profile">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/auth-check.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

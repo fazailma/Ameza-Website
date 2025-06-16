@@ -1,0 +1,60 @@
+/* Navigation Menu Underline Animation */
+.nav-links li a.nav-item {
+  position: relative;
+  padding-bottom: 5px;
+}
+
+.nav-links li a.nav-item::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.nav-links li a.nav-item:hover::after,
+.nav-links li a.nav-item.active::after {
+  width: 100%;
+}
+
+/* Mobile Menu Animation */
+.mobile-menu-container {
+  transform: translateY(-20px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.mobile-menu-container.active {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-menu-container ul li a {
+  position: relative;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.mobile-menu-container ul li a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.mobile-menu-container ul li a:hover::before,
+.mobile-menu-container ul li a.active::before {
+  width: 100%;
+}
+
+.mobile-menu-container ul li a:hover {
+  transform: translateX(5px);
+}

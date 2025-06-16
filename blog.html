@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artikel Fashion - Ameza</title>
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/blog.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <nav class="navbar-custom">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">Ameza<span>.</span></a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <ul class="nav-links d-none d-lg-flex">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="customize.html">Customize</a></li>
+                    <li><a href="blog.html" class="active">Artikel</a></li>
+                </ul>
+
+                <!-- Desktop Header Icons -->
+                <div class="header-icons d-none d-md-flex">
+                    <a href="cart.html" class="icon-with-badge">
+                        <i class="las la-shopping-cart"></i>
+                        <span class="badge" id="cart-count">0</span>
+                    </a>
+                    <a href="profile.html"><i class="las la-user"></i></a>
+                </div>
+
+                <!-- Mobile Header Icons -->
+                <div class="mobile-header-icons d-md-none">
+                    <a href="cart.html" class="icon-with-badge">
+                        <i class="las la-shopping-cart"></i>
+                        <span class="badge" id="mobile-cart-count">0</span>
+                    </a>
+                    <a href="profile.html"><i class="las la-user"></i></a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MOBILE SEARCH BAR - DI ATAS, MUDAH DIAKSES -->
+    <div class="mobile-search-bar d-md-none">
+        <div class="container">
+            <form class="mobile-search-form">
+                <input type="text" placeholder="Cari artikel fashion...">
+                <button type="submit"><i class="las la-search"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MOBILE CATEGORIES -->
+    <div class="mobile-categories d-md-none">
+        <div class="mobile-categories-scroll">
+            <div class="mobile-category-item active">Semua</div>
+            <div class="mobile-category-item">Fashion</div>
+            <div class="mobile-category-item">Style Tips</div>
+            <div class="mobile-category-item">Trends</div>
+            <div class="mobile-category-item">Shopping</div>
+            <div class="mobile-category-item">Lifestyle</div>
+        </div>
+    </div>
+
+    <!-- Featured Post -->
+    <section class="featured-post">
+        <div class="container">
+            <div class="featured-post-container">
+                <div class="featured-post-image" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');">
+                    <div class="featured-badge">Featured</div>
+                </div>
+                <div class="featured-post-content">
+                    <div class="post-meta">
+                        <span class="post-category">Fashion</span>
+                        <span class="post-date"><i class="las la-calendar"></i> 20 Mei 2023</span>
+                    </div>
+                    <h1 class="post-title">7 Cara Memadukan Pakaian untuk Berbagai Acara Formal dan Kasual</h1>
+                    <p class="post-excerpt">Memilih pakaian yang tepat untuk berbagai acara bisa menjadi tantangan. Artikel ini akan membantu Anda memahami cara memadukan outfit yang stylish untuk setiap kesempatan.</p>
+                    <a href="blog-detail.html" class="btn">Baca Selengkapnya</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Content -->
+    <section class="blog-content">
+        <div class="container">
+            <div class="blog-layout">
+                <!-- Blog Main -->
+                <div class="blog-main">
+                    <div class="blog-grid">
+                        <!-- Blog Card 1 -->
+                        <article class="blog-card">
+                            <div class="blog-image" style="background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&auto=format&fit=crop&w=720&q=80');"></div>
+                            <div class="blog-content">
+                                <div class="blog-date"><i class="las la-calendar"></i> 18 Mei 2023</div>
+                                <h3>Tren Fashion Musim Ini</h3>
+                                <p>Discover the latest fashion trends that are dominating this season and how to incorporate them into your wardrobe.</p>
+                                <a href="blog-detail.html" class="blog-link">Baca Selengkapnya <i class="las la-arrow-right"></i></a>
+                            </div>
+                        </article>
+
+                        <!-- Blog Card 2 -->
+                        <article class="blog-card">
+                            <div class="blog-image" style="background-image: url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&auto=format&fit=crop&w=720&q=80');"></div>
+                            <div class="blog-content">
+                                <div class="blog-date"><i class="las la-calendar"></i> 15 Mei 2023</div>
+                                <h3>Tips Berbelanja Fashion Online</h3>
+                                <p>Panduan lengkap untuk berbelanja fashion online dengan aman dan mendapatkan produk berkualitas terbaik.</p>
+                                <a href="blog-detail.html" class="blog-link">Baca Selengkapnya <i class="las la-arrow-right"></i></a>
+                            </div>
+                        </article>
+
+                        <!-- Blog Card 3 -->
+                        <article class="blog-card">
+                            <div class="blog-image" style="background-image: url('https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&auto=format&fit=crop&w=720&q=80');"></div>
+                            <div class="blog-content">
+                                <div class="blog-date"><i class="las la-calendar"></i> 12 Mei 2023</div>
+                                <h3>Sustainable Fashion Movement</h3>
+                                <p>Learn about the sustainable fashion movement and how you can make more eco-friendly clothing choices.</p>
+                                <a href="blog-detail.html" class="blog-link">Baca Selengkapnya <i class="las la-arrow-right"></i></a>
+                            </div>
+                        </article>
+
+                        <!-- Blog Card 4 -->
+                        <article class="blog-card">
+                            <div class="blog-image" style="background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&auto=format&fit=crop&w=720&q=80');"></div>
+                            <div class="blog-content">
+                                <div class="blog-date"><i class="las la-calendar"></i> 10 Mei 2023</div>
+                                <h3>Wardrobe Essentials</h3>
+                                <p>Discover the must-have pieces every wardrobe needs and how to style them for different occasions.</p>
+                                <a href="blog-detail.html" class="blog-link">Baca Selengkapnya <i class="las la-arrow-right"></i></a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <a href="#" class="prev"><i class="las la-angle-left"></i></a>
+                        <a href="#" class="active">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#" class="next"><i class="las la-angle-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Blog Sidebar - TETAP ADA DI DESKTOP -->
+                <aside class="blog-sidebar">
+                    <!-- Search Widget -->
+                    <div class="sidebar-widget">
+                        <h3>Cari Artikel</h3>
+                        <form class="search-form">
+                            <input type="text" placeholder="Cari artikel...">
+                            <button type="submit"><i class="las la-search"></i></button>
+                        </form>
+                    </div>
+
+                    <!-- Categories Widget -->
+                    <div class="sidebar-widget">
+                        <h3>Kategori</h3>
+                        <ul class="categories-list">
+                            <li><a href="#">Fashion <span>12</span></a></li>
+                            <li><a href="#">Style Tips <span>8</span></a></li>
+                            <li><a href="#">Trends <span>15</span></a></li>
+                            <li><a href="#">Shopping <span>6</span></a></li>
+                            <li><a href="#">Lifestyle <span>9</span></a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Recent Posts Widget -->
+                    <div class="sidebar-widget">
+                        <h3>Artikel Terbaru</h3>
+                        <div class="recent-posts">
+                            <div class="recent-post">
+                                <div class="recent-post-image" style="background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80');"></div>
+                                <div class="recent-post-info">
+                                    <h4><a href="#">Tren Fashion Musim Ini</a></h4>
+                                    <div class="post-date"><i class="las la-calendar"></i> 18 Mei 2023</div>
+                                </div>
+                            </div>
+                            <div class="recent-post">
+                                <div class="recent-post-image" style="background-image: url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80');"></div>
+                                <div class="recent-post-info">
+                                    <h4><a href="#">Tips Berbelanja Online</a></h4>
+                                    <div class="post-date"><i class="las la-calendar"></i> 15 Mei 2023</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tags Widget -->
+                    <div class="sidebar-widget">
+                        <h3>Tags</h3>
+                        <div class="tags-cloud">
+                            <a href="#">Fashion</a>
+                            <a href="#">Style</a>
+                            <a href="#">Trends</a>
+                            <a href="#">Shopping</a>
+                            <a href="#">Outfit</a>
+                            <a href="#">Casual</a>
+                            <a href="#">Formal</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- MOBILE BOTTOM NAVIGATION -->
+    <div class="mobile-bottom-nav d-md-none">
+        <div class="mobile-bottom-nav-container">
+            <a href="index.html" class="mobile-nav-item">
+                <i class="las la-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="shop.html" class="mobile-nav-item">
+                <i class="las la-shopping-bag"></i>
+                <span>Shop</span>
+            </a>
+            <a href="customize.html" class="mobile-nav-item">
+                <i class="las la-tshirt"></i>
+                <span>Customize</span>
+            </a>
+            <a href="blog.html" class="mobile-nav-item active">
+                <i class="las la-newspaper"></i>
+                <span>Artikel</span>
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/blog.js"></script>
+</body>
+</html>

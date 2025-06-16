@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Saya - Ameza Fashion</title>
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <a href="index.html">Ameza.</a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="customize.html">Customize</a></li>
+                    <li><a href="blog.html">Artikel</a></li>
+                </ul>
+                <div class="icons">
+                    <a href="profile.html" class="active"><i class="las la-user"></i></a>
+                    <a href="cart.html"><i class="las la-shopping-cart"></i> <span id="cart-count">0</span></a>
+                </div>
+                <div class="mobile-menu">
+                    <i class="las la-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="profile-page">
+        <div class="profile-banner">
+            <div class="container">
+                <h1>Profil Saya</h1>
+                <p>Kelola informasi dan pesanan Anda</p>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="profile-container">
+                <!-- Profile Sidebar -->
+                <div class="profile-sidebar">
+                    <div class="profile-info">
+                        <div class="profile-avatar">
+                            <img src="/placeholder.svg?height=120&width=120&text=Avatar" alt="Profile Avatar" id="profile-avatar-img">
+                            <div class="change-avatar">
+                                <i class="las la-camera"></i>
+                            </div>
+                        </div>
+                        <div class="profile-name" id="profile-display-name">Budi Santoso</div>
+                        <div class="profile-email" id="profile-display-email">budi.santoso@email.com</div>
+                        <div class="profile-status">Member</div>
+                    </div>
+                    
+                    <ul class="profile-menu">
+                        <li class="profile-menu-item" data-tab="profile">
+                            <a href="#"><i class="las la-user"></i> Tentang Profil Saya</a>
+                        </li>
+                        <li class="profile-menu-item" data-tab="orders">
+                            <a href="#"><i class="las la-shopping-bag"></i> Pesanan Saya</a>
+                        </li>
+                        <li class="profile-menu-item" data-tab="addresses">
+                            <a href="#"><i class="las la-map-marker"></i> Alamat Saya</a>
+                        </li>
+                        <li class="profile-menu-item" data-tab="saved-outfits">
+                            <a href="#"><i class="las la-tshirt"></i> Outfit Tersimpan</a>
+                        </li>
+                        <li class="profile-menu-item" data-tab="settings">
+                            <a href="#"><i class="las la-cog"></i> Pengaturan</a>
+                        </li>
+                        <li class="profile-menu-item logout">
+                            <a href="#"><i class="las la-sign-out-alt"></i> Keluar</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Profile Content -->
+                <div class="profile-content">
+                    <!-- Welcome Tab (Shown by Default) -->
+                    <div class="profile-welcome">
+                        <div class="welcome-icon">
+                            <i class="las la-user-circle"></i>
+                        </div>
+                        <h2 id="welcome-message">Selamat Datang, Budi!</h2>
+                        <p>Dari sini Anda dapat melihat dan mengelola informasi profil, pesanan, wishlist, dan alamat pengiriman Anda.</p>
+                        
+                        <!-- Profile Stats -->
+                        <div class="profile-stats">
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="las la-shopping-bag"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="user-total-orders">0</h3>
+                                    <p>Total Pesanan</p>
+                                </div>
+                            </div>
+                    
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="las la-star"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="user-total-reviews">0</h3>
+                                    <p>Ulasan</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button id="show-profile-details" class="btn">Lihat Detail Profil</button>
+                    </div>
+                    
+                    <!-- Profile Details Tab (Hidden by Default) -->
+                    <div id="profile-tab" class="profile-tab">
+                        <h3>Informasi Profil</h3>
+                        <form class="profile-form">
+                            <div class="input-group">
+                                <label for="first-name">Nama Depan</label>
+                                <input type="text" id="first-name" value="Budi">
+                            </div>
+                            <div class="input-group">
+                                <label for="last-name">Nama Belakang</label>
+                                <input type="text" id="last-name" value="Santoso">
+                            </div>
+                            <div class="input-group">
+                                <label for="profile-email">Email</label>
+                                <input type="email" id="profile-email" value="budi.santoso@email.com">
+                            </div>
+                            <div class="input-group">
+                                <label for="profile-phone">Nomor Telepon</label>
+                                <input type="tel" id="profile-phone" value="+62 812 3456 7890">
+                            </div>
+                            <div class="input-group">
+                                <label for="birth-date">Tanggal Lahir</label>
+                                <input type="date" id="birth-date" value="1990-05-15">
+                            </div>
+                            <div class="input-group">
+                                <label for="gender">Jenis Kelamin</label>
+                                <select id="gender">
+                                    <option value="male" selected>Laki-laki</option>
+                                    <option value="female">Perempuan</option>
+                                    <option value="other">Lainnya</option>
+                                </select>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn">Simpan Perubahan</button>
+                            </div>
+                        </form>
+                        
+                        <div class="change-password">
+                            <h3>Ubah Password</h3>
+                            <form class="password-form">
+                                <div class="input-group">
+                                    <label for="current-password">Password Saat Ini</label>
+                                    <input type="password" id="current-password">
+                                </div>
+                                <div class="input-group">
+                                    <label for="new-password">Password Baru</label>
+                                    <input type="password" id="new-password">
+                                </div>
+                                <div class="input-group">
+                                    <label for="confirm-password">Konfirmasi Password Baru</label>
+                                    <input type="password" id="confirm-password">
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn">Ubah Password</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Orders Tab (Hidden by Default) -->
+                    <div id="orders-tab" class="profile-tab">
+                        <h3>Pesanan Saya</h3>
+                        <div class="orders-filter">
+                            <div class="filter-group">
+                                <label for="profile-order-period">Periode</label>
+                                <select id="profile-order-period">
+                                    <option value="all">Semua Waktu</option>
+                                    <option value="last-month">1 Bulan Terakhir</option>
+                                    <option value="last-3-months">3 Bulan Terakhir</option>
+                                    <option value="last-6-months">6 Bulan Terakhir</option>
+                                    <option value="last-year">1 Tahun Terakhir</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label for="profile-order-status">Status</label>
+                                <select id="profile-order-status">
+                                    <option value="all">Semua Status</option>
+                                    <option value="pending">Menunggu Pembayaran</option>
+                                    <option value="paid">Sudah Dibayar</option>
+                                    <option value="processing">Diproses</option>
+                                    <option value="shipped">Dikirim</option>
+                                    <option value="delivered">Terkirim</option>
+                                    <option value="completed">Selesai</option>
+                                    <option value="cancelled">Dibatalkan</option>
+                                    <option value="refunded">Dikembalikan</option>
+                                </select>
+                            </div>
+                            <div class="filter-group search-group">
+                                <input type="text" placeholder="Cari pesanan..." id="profile-order-search">
+                                <button class="search-btn" id="profile-search-btn"><i class="las la-search"></i></button>
+                            </div>
+                        </div>
+                        
+                        <div class="orders-stats">
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="las la-shopping-bag"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h4 id="total-orders-count">0</h4>
+                                    <p>Total Pesanan</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="las la-clock"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h4 id="pending-orders-count">0</h4>
+                                    <p>Menunggu</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="las la-check-circle"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h4 id="completed-orders-count">0</h4>
+                                    <p>Selesai</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="las la-money-bill"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h4 id="total-spent">Rp 0</h4>
+                                    <p>Total Belanja</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="orders-list" id="profile-orders-list">
+                            <!-- Orders will be loaded here -->
+                        </div>
+                        
+                        <div class="empty-orders" id="empty-orders" style="display: none;">
+                            <div class="empty-icon">
+                                <i class="las la-shopping-bag"></i>
+                            </div>
+                            <h4>Belum ada pesanan</h4>
+                            <p>Anda belum memiliki pesanan. Mulai berbelanja sekarang!</p>
+                            <a href="shop.html" class="btn">Mulai Berbelanja</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Addresses Tab (Hidden by Default) -->
+                    <div id="addresses-tab" class="profile-tab">
+                        <h3>Alamat Saya</h3>
+                        <div class="addresses-list">
+                            <div class="address-item default">
+                                <div class="address-badge">Utama</div>
+                                <h4>Rumah</h4>
+                                <p>Budi Santoso</p>
+                                <p>Jl. Merdeka No. 123</p>
+                                <p>Jakarta Selatan, 12345</p>
+                                <p>Indonesia</p>
+                                <p>+62 812 3456 7890</p>
+                                <div class="address-actions">
+                                    <button class="btn-sm">Edit</button>
+                                    <button class="btn-sm">Hapus</button>
+                                </div>
+                            </div>
+                            
+                            <div class="address-item">
+                                <h4>Kantor</h4>
+                                <p>Budi Santoso</p>
+                                <p>Jl. Sudirman No. 456</p>
+                                <p>Jakarta Pusat, 10220</p>
+                                <p>Indonesia</p>
+                                <p>+62 812 3456 7890</p>
+                                <div class="address-actions">
+                                    <button class="btn-sm">Edit</button>
+                                    <button class="btn-sm">Hapus</button>
+                                    <button class="btn-sm">Jadikan Utama</button>
+                                </div>
+                            </div>
+                            
+                            <div class="add-address">
+                                <button class="btn">
+                                    <i class="las la-plus"></i> Tambah Alamat Baru
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Saved Outfits Tab (Hidden by Default) -->
+                    <div id="saved-outfits-tab" class="profile-tab">
+                        <h3>Outfit Tersimpan</h3>
+                        <div class="outfits-grid">
+                            <div class="outfit-card">
+                                <div class="outfit-image" style="background-image: url('/placeholder.svg?height=200&width=300&text=Casual+Day+Out');"></div>
+                                <div class="outfit-info">
+                                    <h3>Casual Day Out</h3>
+                                    <p>Dibuat pada: 10 Mei 2023</p>
+                                    <div class="outfit-actions">
+                                        <button class="load-outfit">Lihat</button>
+                                        <button class="delete-outfit"><i class="las la-trash"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="outfit-card">
+                                <div class="outfit-image" style="background-image: url('/placeholder.svg?height=200&width=300&text=Office+Chic');"></div>
+                                <div class="outfit-info">
+                                    <h3>Office Chic</h3>
+                                    <p>Dibuat pada: 15 Mei 2023</p>
+                                    <div class="outfit-actions">
+                                        <button class="load-outfit">Lihat</button>
+                                        <button class="delete-outfit"><i class="las la-trash"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="outfit-card">
+                                <div class="outfit-image" style="background-image: url('/placeholder.svg?height=200&width=300&text=Evening+Elegance');"></div>
+                                <div class="outfit-info">
+                                    <h3>Evening Elegance</h3>
+                                    <p>Dibuat pada: 20 Mei 2023</p>
+                                    <div class="outfit-actions">
+                                        <button class="load-outfit">Lihat</button>
+                                        <button class="delete-outfit"><i class="las la-trash"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tracking Modal -->
+    <div class="modal" id="tracking-modal">
+        <div class="modal-content tracking">
+            <span class="close-modal">&times;</span>
+            <h2>Lacak Pengiriman</h2>
+            <div class="tracking-info">
+                <div class="tracking-header">
+                    <div class="tracking-detail">
+                        <p><strong>Nomor Resi:</strong> JNE1234567890</p>
+                        <p><strong>Kurir:</strong> JNE Express</p>
+                    </div>
+                    <div class="tracking-status">
+                        <span class="status-delivered">Diterima</span>
+                    </div>
+                </div>
+                
+                <div class="tracking-timeline">
+                    <div class="timeline-item completed">
+                        <div class="timeline-point"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">17 Mei 2023, 11:15 WIB</div>
+                            <div class="timeline-title">Paket telah diserahkan ke kurir</div>
+                            <div class="timeline-desc">Jakarta Selatan</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item completed">
+                        <div class="timeline-point"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">17 Mei 2023, 15:30 WIB</div>
+                            <div class="timeline-title">Paket telah tiba di gudang sortir</div>
+                            <div class="timeline-desc">Jakarta Selatan</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item completed">
+                        <div class="timeline-point"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">18 Mei 2023, 08:45 WIB</div>
+                            <div class="timeline-title">Paket dalam perjalanan ke alamat Anda</div>
+                            <div class="timeline-desc">Jakarta Selatan</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item completed">
+                        <div class="timeline-point"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">19 Mei 2023, 14:00 WIB</div>
+                            <div class="timeline-title">Paket telah diterima</div>
+                            <div class="timeline-desc">Diterima oleh: Budi Santoso</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div class="modal" id="review-modal">
+        <div class="modal-content review">
+            <span class="close-modal">&times;</span>
+            <h2>Beri Ulasan</h2>
+            <div class="review-products">
+                <div class="review-product">
+                    <div class="product-image">
+                        <img src="/placeholder.svg?height=100&width=100&text=Product" alt="Product">
+                    </div>
+                    <div class="product-info">
+                        <h4>Blouse Elegant</h4>
+                        <p>Ukuran: M | Warna: Hitam</p>
+                    </div>
+                    <div class="product-rating">
+                        <div class="rating-stars">
+                            <i class="lar la-star" data-rating="1"></i>
+                            <i class="lar la-star" data-rating="2"></i>
+                            <i class="lar la-star" data-rating="3"></i>
+                            <i class="lar la-star" data-rating="4"></i>
+                            <i class="lar la-star" data-rating="5"></i>
+                        </div>
+                        <textarea placeholder="Bagikan pendapat Anda tentang produk ini..."></textarea>
+                        <div class="review-photos">
+                            <button class="add-photo"><i class="las la-camera"></i> Tambah Foto</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="review-actions">
+                <button class="btn submit-review">Kirim Ulasan</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>Ameza Fashion</h3>
+                    <p>Definisikan gaya Anda dengan koleksi pakaian berkualitas tinggi dan personal dari Ameza Fashion.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="lab la-facebook-f"></i></a>
+                        <a href="#"><i class="lab la-twitter"></i></a>
+                        <a href="#"><i class="lab la-instagram"></i></a>
+                        <a href="#"><i class="lab la-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="customize.html">Customize</a></li>
+                        <li><a href="recommendations.html">Recommendations</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Bantuan</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Pengiriman</a></li>
+                        <li><a href="#">Pengembalian</a></li>
+                        <li><a href="#">Cara Pemesanan</a></li>
+                        <li><a href="#">Cara Pembayaran</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Kontak</h3>
+                    <ul>
+                        <li><i class="las la-map-marker"></i> Jl. Fashion No. 123, Jakarta</li>
+                        <li><i class="las la-phone"></i> +62 123 4567 890</li>
+                        <li><i class="las la-envelope"></i> info@amezafashion.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Ameza Fashion. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Ameza Fashion</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Line Awesome Icons -->
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/shop.css">
+</head>
+<body>
+    <div class="background-pattern"></div>
+    <header class="sticky-top">
+        <div class="container">
+            <div class="navbar-custom">
+                <div class="logo">
+                    <a href="index.html">Ameza<span>.</span></a>
+                </div>
+                <ul class="nav-links d-none d-md-flex">
+                    <li><a href="index.html" class="nav-item">Home</a></li>
+                    <li><a href="shop.html" class="nav-item active">Shop</a></li>
+                    <li><a href="customize.html" class="nav-item">Customize</a></li>
+                    <li><a href="blog.html" class="nav-item">Artikel</a></li>
+                </ul>
+                <div class="header-icons">
+                    <a href="cart.html" class="icon-with-badge">
+                        <i class="las la-shopping-cart"></i>
+                        <span class="badge" id="cart-count">0</span>
+                    </a>
+                    <a href="profile.html"><i class="las la-user"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Bottom Navigation -->
+    <div class="mobile-bottom-nav d-md-none">
+        <div class="container">
+            <div class="mobile-bottom-nav-container">
+                <a href="index.html" class="mobile-nav-item">
+                    <i class="las la-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="shop.html" class="mobile-nav-item active">
+                    <i class="las la-shopping-bag"></i>
+                    <span>Shop</span>
+                </a>
+                <a href="customize.html" class="mobile-nav-item">
+                    <i class="las la-tshirt"></i>
+                    <span>Customize</span>
+                </a>
+                <a href="blog.html" class="mobile-nav-item">
+                    <i class="las la-newspaper"></i>
+                    <span>Artikel</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <section class="shop-section">
+        <div class="container">
+            <div class="shop-top">
+                <div class="shop-search">
+                    <form class="search-form" id="search-form">
+                        <input type="text" placeholder="Cari produk..." class="search-input" id="search-input">
+                        <button type="submit" class="search-button"><i class="las la-search"></i></button>
+                    </form>
+                </div>
+                <div class="filter-toggle">
+                    <button id="filter-toggle-btn" class="btn-outline">
+                        <i class="las la-sliders-h"></i> Filter
+                    </button>
+                </div>
+            </div>
+            
+            <div class="categories-bar">
+                <div class="category-buttons">
+                    <button class="category-btn active" data-category="all">Semua</button>
+                    <button class="category-btn" data-category="tops">Atasan</button>
+                    <button class="category-btn" data-category="bottoms">Bawahan</button>
+                    <button class="category-btn" data-category="dresses">Dress</button>
+                </div>
+            </div>
+            
+            <div class="shop-filters" id="shop-filters" style="display: none;">
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <h4>Harga</h4>
+                        <div class="price-options">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="priceRange" id="price-all" value="all" checked>
+                                <label class="form-check-label" for="price-all">Semua Harga</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="priceRange" id="price-under-200k" value="under-200k">
+                                <label class="form-check-label" for="price-under-200k">Di bawah Rp 200.000</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="priceRange" id="price-200k-400k" value="200k-400k">
+                                <label class="form-check-label" for="price-200k-400k">Rp 200.000 - Rp 400.000</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="priceRange" id="price-over-400k" value="over-400k">
+                                <label class="form-check-label" for="price-over-400k">Di atas Rp 400.000</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <h4>Warna</h4>
+                        <div class="color-options">
+                            <div class="color-option" data-color="black" style="background-color: #000;"></div>
+                            <div class="color-option" data-color="white" style="background-color: #fff; border: 1px solid #ddd;"></div>
+                            <div class="color-option" data-color="red" style="background-color: #e74c3c;"></div>
+                            <div class="color-option" data-color="blue" style="background-color: #3498db;"></div>
+                            <div class="color-option" data-color="green" style="background-color: #2ecc71;"></div>
+                            <div class="color-option" data-color="beige" style="background-color: #e8d4b9;"></div>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <h4>Ukuran</h4>
+                        <div class="size-options">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="size-s" data-size="S">
+                                <label class="form-check-label" for="size-s">S</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="size-m" data-size="M">
+                                <label class="form-check-label" for="size-m">M</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="size-l" data-size="L">
+                                <label class="form-check-label" for="size-l">L</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="size-xl" data-size="XL">
+                                <label class="form-check-label" for="size-xl">XL</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-actions">
+                    <button class="btn btn-primary apply-filters-btn">Terapkan Filter</button>
+                    <button class="btn btn-outline-secondary clear-filters-btn">Hapus Filter</button>
+                </div>
+            </div>
+            
+            <div class="row products-grid">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-4"> <!-- Diubah menjadi col-6 untuk dua kolom di mobile -->
+                    <div class="product-card" data-category="tops" data-price="329000" data-color="black" data-size="S,M,L">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/9e/37/d7/9e37d7607ebd223a0d636e018e56bc6c.jpg');">
+                            <div class="discount-tag">-20%</div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Blouse Elegant</h3>
+                            <div class="product-price-container">
+                                <span class="product-price-original">Rp 399.000</span>
+                                <span class="product-price">Rp 329.000</span>
+                            </div>
+                            <div class="product-actions">
+                                <a href="detail.html" class="view-details">Detail</a>
+                                <button class="cart-icon-btn add-to-cart" data-product="Blouse Elegant" data-price="329000">
+                                    <i class="las la-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-4"> <!-- Diubah menjadi col-6 -->
+                    <div class="product-card" data-category="dresses" data-price="459000" data-color="red" data-size="S,M,L,XL">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/1f/9f/1b/1f9f1be976546ef5ffa3296e237cf36b.jpg');">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Dress Casual</h3>
+                            <div class="product-price-container">
+                                <span class="product-price">Rp 459.000</span>
+                            </div>
+                            <div class="product-actions">
+                                <a href="detail.html" class="view-details">Detail</a>
+                                <button class="cart-icon-btn add-to-cart" data-product="Dress Casual" data-price="459000">
+                                    <i class="las la-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-4"> <!-- Diubah menjadi col-6 -->
+                    <div class="product-card" data-category="outerwear" data-price="599000" data-color="beige" data-size="M,L,XL">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/38/81/de/3881de9c147f1e5f7585e87e7ab591cd.jpg');">
+                            <div class="discount-tag">-15%</div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Sweater Cardigan</h3>
+                            <div class="product-price-container">
+                                <span class="product-price-original">Rp 699.000</span>
+                                <span class="product-price">Rp 599.000</span>
+                            </div>
+                            <div class="product-actions">
+                                <a href="detail.html" class="view-details">Detail</a>
+                                <button class="cart-icon-btn add-to-cart" data-product="Sweater Cardigan" data-price="599000">
+                                    <i class="las la-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-4"> <!-- Diubah menjadi col-6 -->
+                    <div class="product-card" data-category="bottoms" data-price="379000" data-color="blue" data-size="S,M,L,XL">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/16/92/ee/1692ee5cc3a5a10cb7a946e1e5c70560.jpg');">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Celana Jeans</h3>
+                            <div class="product-price-container">
+                                <span class="product-price">Rp 379.000</span>
+                            </div>
+                            <div class="product-actions">
+                                <a href="detail.html" class="view-details">Detail</a>
+                                <button class="cart-icon-btn add-to-cart" data-product="Celana Jeans" data-price="379000">
+                                    <i class="las la-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-4"> <!-- Diubah menjadi col-6 -->
+                    <div class="product-card" data-category="tops" data-price="299000" data-color="white" data-size="S,M,L">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/fa/86/0a/fa860a6293b84962751df4c63cb3509a.jpg');">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Kemeja Putih</h3>
+                            <div class="product-price-container">
+                                <span class="product-price">Rp 299.000</span>
+                            </div>
+                            <div class="product-actions">
+                                <a href="detail.html" class="view-details">Detail</a>
+                                <button class="cart-icon-btn add-to-cart" data-product="Kemeja Putih" data-price="299000">
+                                    <i class="las la-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-4"> <!-- Diubah menjadi col-6 -->
+                    <div class="product-card" data-category="bottoms" data-price="349000" data-color="black" data-size="S,M,L,XL">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/37/12/f2/3712f25a7326e2140125b94a0c895e68.jpg');">
+                            <div class="discount-tag">-10%</div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Rok Midi</h3>
+                            <div class="product-price-container">
+                                <span class="product-price-original">Rp 389.000</span>
+                                <span class="product-price">Rp 349.000</span>
+                            </div>
+                            <div class="product-actions">
+                                <a href="detail.html" class="view-details">Detail</a>
+                                <button class="cart-icon-btn add-to-cart" data-product="Rok Midi" data-price="349000">
+                                    <i class="las la-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-4"> <!-- Diubah menjadi col-6 -->
+                    <div class="product-card" data-category="tops" data-price="199000" data-color="beige" data-size="S,M,L">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/05/3c/fe/053cfeddacfa723f2b1cbce908261b9c.jpg');">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Kaos Crop</h3>
+                            <div class="product-price-container">
+                                <span class="product-price">Rp 199.000</span>
+                            </div>
+                            <div class="product-actions">
+                                <a href="detail.html" class="view-details">Detail</a>
+                                <button class="cart-icon-btn add-to-cart" data-product="Kaos Crop" data-price="199000">
+                                    <i class="las la-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-4"> <!-- Diubah menjadi col-6 -->
+                    <div class="product-card" data-category="dresses" data-price="499000" data-color="green" data-size="S,M,L">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/f3/42/da/f342da174c8863e2e391886bf7e9676e.jpg');">
+                            <div class="discount-tag">-25%</div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Dress Formal</h3>
+                            <div class="product-price-container">
+                                <span class="product-price-original">Rp 665.000</span>
+                                <span class="product-price">Rp 499.000</span>
+                            </div>
+                            <div class="product-actions">
+                                <a href="detail.html" class="view-details">Detail</a>
+                                <button class="cart-icon-btn add-to-cart" data-product="Dress Formal" data-price="499000">
+                                    <i class="las la-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <!-- Menghapus "Next" link -->
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Cart notification (centered) -->
+    <div class="cart-notification-overlay" id="cartNotificationOverlay">
+        <div class="cart-notification" id="cartNotification">
+            <div class="cart-notification-content">
+                <div class="cart-notification-icon">
+                    <i class="las la-check-circle"></i>
+                </div>
+                <div class="cart-notification-text">
+                    <p class="cart-notification-title">Produk ditambahkan ke keranjang</p>
+                    <p class="cart-notification-product" id="cartNotificationProduct"></p>
+                </div>
+                <button class="cart-notification-close" id="cartNotificationClose">
+                    <i class="las la-times"></i>
+                </button>
+            </div>
+            <div class="cart-notification-actions">
+                <a href="cart.html" class="cart-notification-btn">Lihat Keranjang</a>
+                <button class="cart-notification-btn-outline" id="cartNotificationContinue">Lanjutkan Belanja</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-wrapper">
+            <div class="container">
+                <div class="footer-container">
+                    <div class="footer-col">
+                        <h3>Ameza Fashion</h3>
+                        <p>Definisikan gaya Anda dengan koleksi pakaian berkualitas tinggi dan personal dari Ameza Fashion.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="lab la-facebook-f"></i></a>
+                            <a href="#"><i class="lab la-twitter"></i></a>
+                            <a href="#"><i class="lab la-instagram"></i></a>
+                            <a href="#"><i class="lab la-pinterest"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-col">
+                        <h3>Bantuan</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Pengiriman</a></li>
+                            <li><a href="#">Pengembalian</a></li>
+                            <li><a href="#">Cara Pemesanan</a></li>
+                            <li><a href="#">Cara Pembayaran</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h3>Kontak</h3>
+                        <ul class="footer-links">
+                            <li><i class="las la-map-marker"></i> Jl. Fashion No. 123, Jakarta</li>
+                            <li><i class="las la-phone"></i> +62 123 4567 890</li>
+                            <li><i class="las la-envelope"></i> info@amezafashion.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>© 2023 Ameza Fashion. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/shop.js"></script>
+</body>
+</html>
