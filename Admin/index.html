@@ -6,53 +6,10 @@
     <title>Admin Dashboard - Ameza Fashion</title>
     <!-- Line Awesome Icons -->
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Admin CSS -->
     <link rel="stylesheet" href="css/admin.css">
-    <!-- Tambahkan style untuk loading dan perbaikan sidebar -->
-<style>
-  /* Perbaikan untuk loading */
-  .loading-spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #000;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
-  /* Perbaikan untuk sidebar collapsed */
-  .sidebar.collapsed .logo a {
-    font-size: 0;
-  }
-  
-  .sidebar.collapsed .logo {
-    justify-content: center;
-  }
-  
-  /* Perbaikan untuk background */
-  body {
-    background-color: #f5f5f5;
-  }
-  
-  .main-content {
-    background-color: #f5f5f5;
-  }
-  
-  /* Perbaikan untuk mengurangi kedipan */
-  .page-content {
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-  
-  .page-content.active {
-    opacity: 1;
-  }
-</style>
 </head>
 <body>
     <div class="admin-layout">
@@ -60,7 +17,7 @@
         <aside class="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href="index.html">Ameza<span>.</span></a>
+                    <a href="../index.html">Ameza<span>.</span></a>
                 </div>
                 <button class="sidebar-toggle">
                     <i class="las la-bars"></i>
@@ -128,11 +85,15 @@
                     <button class="mobile-toggle">
                         <i class="las la-bars"></i>
                     </button>
+                    <!-- Optional: Add sidebar mode toggle for mobile -->
+                    <button class="mobile-sidebar-mode d-none" id="mobile-sidebar-mode" style="display: none;">
+                        <i class="las la-compress-arrows-alt"></i>
+                    </button>
                     <h1 id="page-title">Dashboard</h1>
                 </div>
                 <div class="user-info">
                     <span id="userName">Admin User</span>
-                    <img src="../images/avatar.jpg" alt="User Avatar" class="avatar">
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-REHji32IhsEiv5DZx5FrCe2YXRMvpW.png" alt="User Avatar" class="avatar">
                     <div class="user-dropdown">
                         <ul>
                             <li><a href="#" id="editProfileBtn"><i class="las la-user"></i> Edit Profil</a></li>
@@ -188,16 +149,24 @@
                     <div class="dashboard-charts">
                         <div class="chart-card">
                             <h3>Penjualan Mingguan</h3>
-                            <div class="chart-placeholder">
-                                <i class="las la-chart-line"></i>
-                                <p>Grafik Penjualan</p>
-                            </div>
+                            <canvas id="salesChart" width="400" height="200"></canvas>
                         </div>
+                        <div class="chart-card">
+                            <h3>Kategori Produk</h3>
+                            <canvas id="categoryChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-charts" style="margin-top: 24px;">
                         <div class="recent-orders">
                             <h3>Transaksi Terbaru</h3>
                             <div class="orders-list" id="recent-transactions-list">
                                 <!-- Recent transactions will be loaded here -->
                             </div>
+                        </div>
+                        <div class="chart-card">
+                            <h3>Status Transaksi</h3>
+                            <canvas id="statusChart" width="400" height="200"></canvas>
                         </div>
                     </div>
                 </div>
@@ -213,22 +182,24 @@
                     </div>
                     
                     <div class="table-container">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Gambar</th>
-                                    <th>Nama Produk</th>
-                                    <th>Kategori</th>
-                                    <th>Harga</th>
-                                    <th>Diskon</th>
-                                    <th>Stok</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody id="products-table-body">
-                                <!-- Products will be loaded here -->
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Gambar</th>
+                                        <th>Nama Produk</th>
+                                        <th>Kategori</th>
+                                        <th>Harga</th>
+                                        <th>Diskon</th>
+                                        <th>Stok</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="products-table-body">
+                                    <!-- Products will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
@@ -243,20 +214,22 @@
                     </div>
                     
                     <div class="table-container">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Gambar</th>
-                                    <th>Judul</th>
-                                    <th>Tanggal</th>
-                                    <th>Status</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody id="articles-table-body">
-                                <!-- Articles will be loaded here -->
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Gambar</th>
+                                        <th>Judul</th>
+                                        <th>Tanggal</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="articles-table-body">
+                                    <!-- Articles will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
@@ -271,22 +244,24 @@
                     </div>
                     
                     <div class="table-container">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>ID Transaksi</th>
-                                    <th>Pelanggan</th>
-                                    <th>Produk</th>
-                                    <th>Total</th>
-                                    <th>Status</th>
-                                    <th>Tanggal</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody id="transactions-table-body">
-                                <!-- Transactions will be loaded here -->
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID Transaksi</th>
+                                        <th>Pelanggan</th>
+                                        <th>Produk</th>
+                                        <th>Total</th>
+                                        <th>Status</th>
+                                        <th>Tanggal</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="transactions-table-body">
+                                    <!-- Transactions will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
@@ -301,21 +276,23 @@
                     </div>
                     
                     <div class="table-container">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Nama</th>
-                                    <th>Email</th>
-                                    <th>Telepon</th>
-                                    <th>Role</th>
-                                    <th>Tanggal Daftar</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody id="users-table-body">
-                                <!-- Users will be loaded here -->
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Nama</th>
+                                        <th>Email</th>
+                                        <th>Telepon</th>
+                                        <th>Role</th>
+                                        <th>Tanggal Daftar</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="users-table-body">
+                                    <!-- Users will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
@@ -325,20 +302,22 @@
                         <h2>Kelola Pelanggan</h2>
                     </div>
                     <div class="table-container">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Nama</th>
-                                    <th>Email</th>
-                                    <th>Telepon</th>
-                                    <th>Total Pesanan</th>
-                                    <th>Bergabung</th>
-                                </tr>
-                            </thead>
-                            <tbody id="customers-table-body">
-                                <!-- Customers will be loaded here -->
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Nama</th>
+                                        <th>Email</th>
+                                        <th>Telepon</th>
+                                        <th>Total Pesanan</th>
+                                        <th>Bergabung</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="customers-table-body">
+                                    <!-- Customers will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
@@ -637,8 +616,8 @@
         </div>
     </div>
 
-    <script src="../js/auth.js"></script>
-    <script src="../js/auth-check.js"></script>
-    <script src="js/admin.js"></script>
+    <script src="../JS/auth.js"></script>
+    <script src="../JS/auth-check.js"></script>
+    <script src="JS/admin.js"></script>
 </body>
 </html>

@@ -1,76 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Produk - Ameza Fashion</title>
-    <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/detail.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Line Awesome Icons (line style icons) -->
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 </head>
 <body>
-    <header>
-    <div class="container">
-        <div class="navbar-custom">
-            <!-- Logo -->
-            <div class="logo">
-                <a href="index.html">Ameza<span>.</span></a>
-            </div>
-            
-            <!-- Navigation Links -->
-            <ul class="nav-links d-none d-md-flex">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="shop.html" class="active">Shop</a></li>
-                <li><a href="customize.html">Customize</a></li>
-                <li><a href="blog.html">Artikel</a></li>
-            </ul>
-            
-            
-            <div class="header-icons">
-                <a href="cart.html" class="icon-with-badge">
-                    <i class="las la-shopping-cart"></i>
-                    <span class="badge" id="cart-count">0</span>
-                </a>
-                <a href="profile.html"><i class="las la-user"></i></a>
+    <!-- MOBILE HEADER - SIMPLE WITH BACK BUTTON -->
+    <header class="mobile-header d-md-none">
+        <div class="container">
+            <div class="mobile-header-content">
+                <button class="back-btn" type="button" onclick="goBack()">
+                    <i class="las la-arrow-left"></i>
+                </button>
+                <div class="header-title">
+                    <span>Detail Produk</span>
+                </div>
+                <div class="header-icons">
+                    <a href="cart.html" class="icon-with-badge">
+                        <i class="las la-shopping-cart"></i>
+                        <span class="badge" id="mobile-cart-count">0</span>
+                    </a>
+                    <a href="profile.html"><i class="las la-user"></i></a>
+                </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>
+
+    <!-- DESKTOP HEADER -->
+    <header class="desktop-header d-none d-md-block">
+        <div class="container">
+            <div class="navbar-custom">
+                <div class="left-section">
+                    <button class="back-btn" type="button" onclick="goBack()">
+                        <i class="las la-arrow-left"></i>
+                    </button>
+                    <div class="logo">
+                        <a href="index.html">Ameza<span>.</span></a>
+                    </div>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html" class="active">Shop</a></li>
+                    <li><a href="customize.html">Customize</a></li>
+                    <li><a href="blog.html">Artikel</a></li>
+                </ul>
+                <div class="header-icons">
+                    <a href="cart.html" class="icon-with-badge">
+                        <i class="las la-shopping-cart"></i>
+                        <span class="badge" id="desktop-cart-count">0</span>
+                    </a>
+                    <a href="profile.html"><i class="las la-user"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
 
     <section class="product-detail">
         <div class="container">
             <div class="product-detail-container">
                 <div class="product-images">
-    <div class="main-image">
-        <img src="https://i.pinimg.com/736x/9e/37/d7/9e37d7607ebd223a0d636e018e56bc6c.jpg" alt="" id="main-product-image">
-        <div class="discount-tag" id="discount-tag"></div>
-    </div>
-</div>
+                    <div class="main-image">
+                        <img src="https://i.pinimg.com/736x/9e/37/d7/9e37d7607ebd223a0d636e018e56bc6c.jpg" alt="" id="main-product-image">
+                        <div class="discount-tag" id="discount-tag">-20%</div>
+                    </div>
+                    <div class="thumbnail-images">
+                        <div class="thumbnail active">
+                            <img src="https://i.pinimg.com/736x/9e/37/d7/9e37d7607ebd223a0d636e018e56bc6c.jpg" alt="">
+                        </div>
+                        <div class="thumbnail">
+                            <img src="https://i.pinimg.com/736x/21/12/3f/21123f2e1798930ac48ed7dfb46b7ae9.jpg" alt="">
+                        </div>
+                        <div class="thumbnail">
+                            <img src="https://i.pinimg.com/736x/e6/37/57/e6375720e5883734ed2ecafe335445bb.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
                 <div class="product-info">
-                    <h1 class="product-title" id="product-title"></h1>
+                    <h1 class="product-title" id="product-title">Kemeja Casual Premium</h1>
                     <div class="product-price-container">
-                        <p class="product-price-original" id="product-price-original"></p>
-                        <p class="product-price" id="product-price"></p>
+                        <p class="product-price-original" id="product-price-original">Rp 250.000</p>
+                        <p class="product-price" id="product-price">Rp 200.000</p>
                     </div>
                     <div class="product-rating">
-                        <div id="rating-stars"></div>
-                        <span id="review-count"></span>
+                        <div id="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span id="review-count">(24 ulasan)</span>
                     </div>
-                    <div class="product-description" id="product-description"></div>
+                    <div class="product-description" id="product-description">
+                        <p>Kemeja casual premium dengan bahan berkualitas tinggi yang nyaman digunakan untuk berbagai acara. Desain modern dan elegan cocok untuk gaya kasual maupun semi formal.</p>
+                    </div>
                     <div class="product-options">
                         <div class="option-group">
                             <h3>Warna</h3>
                             <div class="color-options" id="color-options">
-                                <!-- Color options will be loaded dynamically -->
+                                <div class="color-option active" style="background-color: #000000;" data-color="Hitam"></div>
+                                <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Putih"></div>
+                                <div class="color-option" style="background-color: #1e3a8a;" data-color="Navy"></div>
+                                <div class="color-option" style="background-color: #dc2626;" data-color="Merah"></div>
                             </div>
                             <p class="selected-color">Warna: <span id="selected-color-text">Hitam</span></p>
                         </div>
                         <div class="option-group">
                             <h3>Ukuran</h3>
                             <div class="size-options" id="size-options">
-                                <!-- Size options will be loaded dynamically -->
+                                <div class="size-option" data-size="S">S</div>
+                                <div class="size-option active" data-size="M">M</div>
+                                <div class="size-option" data-size="L">L</div>
+                                <div class="size-option" data-size="XL">XL</div>
                             </div>
                             <p class="selected-size">Ukuran: <span id="selected-size-text">M</span></p>
                         </div>
@@ -83,26 +128,28 @@
                             </div>
                         </div>
                     </div>
-                    <div class="product-actions">
+                    
+                    <!-- DESKTOP ACTIONS -->
+                    <div class="product-actions d-none d-md-flex">
                         <button class="btn add-to-cart-btn"><i class="fas fa-shopping-cart"></i> Tambah ke Keranjang</button>
-                        <button class="btn-outline wishlist-btn"><i class="far fa-heart"></i> Wishlist</button>
-                    </div>
-                    <div class="product-meta" id="product-meta">
-                        <!-- Product meta will be loaded dynamically -->
-                    </div>
-                    <div class="product-share">
-                        <p>Bagikan:</p>
-                        <div class="social-share">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-pinterest"></i></a>
-                        </div>
+                        <button class="btn buy-now-btn"><i class="fas fa-bolt"></i> Beli Sekarang</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- MOBILE BOTTOM ACTIONS -->
+    <div class="mobile-bottom-actions d-md-none">
+        <button class="mobile-action-btn cart-btn">
+            <i class="las la-shopping-cart"></i>
+            <span>Keranjang</span>
+        </button>
+        <button class="mobile-action-btn buy-btn">
+            <i class="las la-bolt"></i>
+            <span>Beli Sekarang</span>
+        </button>
+    </div>
 
     <section class="product-details-tabs">
         <div class="container">
@@ -110,64 +157,146 @@
                 <div class="tab-header">
                     <div class="tab-btn active" data-tab="description">Deskripsi</div>
                     <div class="tab-btn" data-tab="additional">Informasi Tambahan</div>
-                    <div class="tab-btn" data-tab="reviews">Ulasan (<span id="review-count-tab">0</span>)</div>
+                    <div class="tab-btn" data-tab="reviews">Ulasan (<span id="review-count-tab">24</span>)</div>
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane active" id="description">
                         <h3>Deskripsi Produk</h3>
-                        <div id="product-description-full"></div>
+                        <div id="product-description-full">
+                            <p>Kemeja casual premium ini dibuat dari bahan cotton berkualitas tinggi yang memberikan kenyamanan maksimal saat digunakan. Dengan desain yang modern dan elegan, kemeja ini cocok untuk berbagai acara mulai dari kasual hingga semi formal.</p>
+                            <p><strong>Keunggulan Produk:</strong></p>
+                            <ul>
+                                <li>Bahan 100% cotton premium</li>
+                                <li>Desain modern dan timeless</li>
+                                <li>Nyaman digunakan seharian</li>
+                                <li>Mudah dirawat dan tahan lama</li>
+                                <li>Tersedia dalam berbagai warna</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="tab-pane" id="additional">
                         <h3>Informasi Tambahan</h3>
                         <table class="info-table" id="info-table">
-                            <!-- Additional info will be loaded dynamically -->
+                            <tr>
+                                <th>Bahan</th>
+                                <td>100% Cotton Premium</td>
+                            </tr>
+                            <tr>
+                                <th>Berat</th>
+                                <td>300 gram</td>
+                            </tr>
+                            <tr>
+                                <th>Ukuran</th>
+                                <td>S, M, L, XL</td>
+                            </tr>
+                            <tr>
+                                <th>Warna</th>
+                                <td>Hitam, Putih, Navy, Merah</td>
+                            </tr>
+                            <tr>
+                                <th>Perawatan</th>
+                                <td>Cuci dengan air dingin, jangan bleaching</td>
+                            </tr>
                         </table>
                     </div>
                     <div class="tab-pane" id="reviews">
                         <h3>Ulasan Pelanggan</h3>
                         <div class="review-summary">
                             <div class="rating-average">
-                                <h4 id="average-rating">0</h4>
-                                <div class="stars" id="average-stars"></div>
-                                <p>Berdasarkan <span id="review-count-summary">0</span> ulasan</p>
+                                <h4 id="average-rating">4.5</h4>
+                                <div class="stars" id="average-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <p>Berdasarkan <span id="review-count-summary">24</span> ulasan</p>
                             </div>
                             <div class="rating-bars" id="rating-bars">
-                                <!-- Rating bars will be loaded dynamically -->
+                                <div class="rating-bar">
+                                    <span>5 bintang</span>
+                                    <div class="bar-container">
+                                        <div class="bar" style="width: 60%"></div>
+                                    </div>
+                                    <span>15</span>
+                                </div>
+                                <div class="rating-bar">
+                                    <span>4 bintang</span>
+                                    <div class="bar-container">
+                                        <div class="bar" style="width: 25%"></div>
+                                    </div>
+                                    <span>6</span>
+                                </div>
+                                <div class="rating-bar">
+                                    <span>3 bintang</span>
+                                    <div class="bar-container">
+                                        <div class="bar" style="width: 10%"></div>
+                                    </div>
+                                    <span>2</span>
+                                </div>
+                                <div class="rating-bar">
+                                    <span>2 bintang</span>
+                                    <div class="bar-container">
+                                        <div class="bar" style="width: 4%"></div>
+                                    </div>
+                                    <span>1</span>
+                                </div>
+                                <div class="rating-bar">
+                                    <span>1 bintang</span>
+                                    <div class="bar-container">
+                                        <div class="bar" style="width: 0%"></div>
+                                    </div>
+                                    <span>0</span>
+                                </div>
                             </div>
                         </div>
                         <div class="reviews-list" id="reviews-list">
-                            <!-- Reviews will be loaded dynamically -->
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <div class="reviewer-info">
+                                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=50&h=50&fit=crop&crop=face" alt="Sarah" class="reviewer-avatar">
+                                        <div>
+                                            <h4>Sarah</h4>
+                                            <div class="review-date">2 hari yang lalu</div>
+                                        </div>
+                                    </div>
+                                    <div class="review-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                                <div class="review-content">
+                                    <p>Kemeja yang sangat bagus! Bahannya adem dan nyaman dipakai. Ukurannya pas dan kualitasnya premium. Sangat puas dengan pembelian ini.</p>
+                                </div>
+                            </div>
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <div class="reviewer-info">
+                                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face" alt="Budi" class="reviewer-avatar">
+                                        <div>
+                                            <h4>Budi</h4>
+                                            <div class="review-date">1 minggu yang lalu</div>
+                                        </div>
+                                    </div>
+                                    <div class="review-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                </div>
+                                <div class="review-content">
+                                    <p>Kualitas bagus sesuai harga. Pengiriman cepat dan packaging rapi. Recommended!</p>
+                                </div>
+                            </div>
                         </div>
                         <div class="load-more-reviews">
                             <button class="btn-outline">Lihat Lebih Banyak Ulasan</button>
-                        </div>
-                        <div class="write-review">
-                            <h3>Tulis Ulasan</h3>
-                            <form class="review-form">
-                                <div class="form-group">
-                                    <label>Rating</label>
-                                    <div class="rating-select">
-                                        <i class="far fa-star" data-rating="1"></i>
-                                        <i class="far fa-star" data-rating="2"></i>
-                                        <i class="far fa-star" data-rating="3"></i>
-                                        <i class="far fa-star" data-rating="4"></i>
-                                        <i class="far fa-star" data-rating="5"></i>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="review-name">Nama</label>
-                                    <input type="text" id="review-name" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="review-email">Email</label>
-                                    <input type="email" id="review-email" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="review-content">Ulasan Anda</label>
-                                    <textarea id="review-content" rows="5" required></textarea>
-                                </div>
-                                <button type="submit" class="btn">Kirim Ulasan</button>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -222,7 +351,6 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
-    <script src="js/detail.js"></script>
+    <script src="JS/detail.js"></script>
 </body>
 </html>

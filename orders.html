@@ -4,115 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pesanan Saya - Ameza Fashion</title>
-    <link rel="stylesheet" href="css/orders.css">
+    <!-- Line Awesome Icons -->
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/orders.css">
 </head>
 <body>
-    <header>
+    <!-- Header -->
+    <header class="sticky-top">
         <div class="container">
-            <div class="navbar">
-                <div class="logo">
-                    <a href="index.html">Ameza.</a>
+            <div class="navbar-custom">
+                <!-- Desktop Header -->
+                <div class="logo d-none d-md-block">
+                    <a href="index.html">Ameza<span>.</span></a>
                 </div>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="customize.html">Customize</a></li>
-                    <li><a href="blog.html">Artikel</a></li>
+                <ul class="nav-links d-none d-md-flex">
+                    <li><a href="index.html" class="nav-item">Home</a></li>
+                    <li><a href="shop.html" class="nav-item">Shop</a></li>
+                    <li><a href="customize.html" class="nav-item">Customize</a></li>
+                    <li><a href="blog.html" class="nav-item">Artikel</a></li>
                 </ul>
-                <div class="icons">
+                <div class="header-icons d-none d-md-flex">
+                    <a href="cart.html" class="icon-with-badge">
+                        <i class="las la-shopping-cart"></i>
+                        <span class="badge" id="cart-count">0</span>
+                    </a>
                     <a href="profile.html"><i class="las la-user"></i></a>
-                    <a href="cart.html"><i class="las la-shopping-cart"></i> <span id="cart-count">0</span></a>
                 </div>
-                <div class="mobile-menu">
-                    <i class="las la-bars"></i>
+
+                <!-- Mobile Header -->
+                <div class="mobile-header d-md-none">
+                    <button class="back-btn" onclick="history.back()">
+                        <i class="las la-arrow-left"></i>
+                    </button>
+                    <h1 class="mobile-page-title">Pesanan Saya</h1>
+                    <div class="mobile-header-spacer"></div>
                 </div>
             </div>
         </div>
     </header>
 
-    <div class="profile-container">
-        <div class="profile-sidebar">
-            <div class="user-info">
-                <div class="user-avatar">
-                    <img src="/placeholder.svg?height=100&width=100" alt="User Avatar" id="user-avatar">
-                </div>
-                <div class="user-details">
-                    <h3 id="user-name">User Name</h3>
-                    <p id="user-email">user@example.com</p>
-                    <span class="user-role">Member</span>
-                </div>
-            </div>
-            <div class="sidebar-menu">
-                <a href="profile.html" class="menu-item">
-                    <i class="las la-user"></i>
-                    <span>Tentang Profil Saya</span>
-                </a>
-                <a href="orders.html" class="menu-item active">
-                    <i class="las la-shopping-bag"></i>
-                    <span>Pesanan Saya</span>
-                </a>
-                <a href="wishlist.html" class="menu-item">
-                    <i class="las la-heart"></i>
-                    <span>Wishlist</span>
-                </a>
-                <a href="address.html" class="menu-item">
-                    <i class="las la-map-marker"></i>
-                    <span>Alamat Saya</span>
-                </a>
-                <a href="#" class="menu-item" id="logout-btn">
-                    <i class="las la-sign-out-alt"></i>
-                    <span>Keluar</span>
-                </a>
-            </div>
-        </div>
-
-        <div class="profile-content">
-            <div class="orders-banner">
-                <h1>Pesanan Saya</h1>
-                <p>Lihat dan lacak semua pesanan Anda</p>
-                <nav class="breadcrumb">
-                    <a href="index.html">Home</a>
-                    <span>/</span>
-                    <a href="profile.html">Profile</a>
-                    <span>/</span>
-                    <span>Pesanan</span>
-                </nav>
-            </div>
-
-            <div class="orders-section">
-                <div class="orders-container">
-                    <div class="orders-filter">
-                        <div class="filter-group">
-                            <label for="order-period">Periode</label>
-                            <select id="order-period">
-                                <option value="all">Semua Waktu</option>
-                                <option value="last-month">1 Bulan Terakhir</option>
-                                <option value="last-3-months">3 Bulan Terakhir</option>
-                                <option value="last-6-months">6 Bulan Terakhir</option>
-                                <option value="last-year">1 Tahun Terakhir</option>
-                            </select>
+    <!-- Main Content -->
+    <section class="orders-section">
+        <div class="container">
+            <div class="orders-container">
+                <!-- Profile Sidebar - Desktop Only -->
+                <div class="profile-sidebar d-none d-md-block">
+                    <div class="user-info">
+                        <div class="user-avatar">
+                            <img src="https://i.pinimg.com/736x/5d/82/d8/5d82d8e0d6ce9fb54d0c20321a5ef7f6.jpg" alt="User Avatar" id="user-avatar">
                         </div>
-                        <div class="filter-group">
-                            <label for="order-status">Status</label>
-                            <select id="order-status">
-                                <option value="all">Semua Status</option>
-                                <option value="pending">Menunggu Pembayaran</option>
-                                <option value="paid">Sudah Dibayar</option>
-                                <option value="processing">Sedang Diproses</option>
-                                <option value="shipped">Dikirim</option>
-                                <option value="delivered">Terkirim</option>
-                                <option value="completed">Selesai</option>
-                                <option value="cancelled">Dibatalkan</option>
-                                <option value="refunded">Dikembalikan</option>
-                            </select>
+                        <div class="user-details">
+                            <h3 id="user-name">User Name</h3>
+                            <p id="user-email">user@example.com</p>
+                            <span class="user-role">Member</span>
                         </div>
-                        <div class="filter-group search-group">
-                            <input type="text" placeholder="Cari pesanan..." id="order-search">
-                            <button class="search-btn"><i class="las la-search"></i></button>
+                    </div>
+                    <div class="sidebar-menu">
+                        <a href="profile.html" class="menu-item">
+                            <i class="las la-user"></i>
+                            <span>Profil Saya</span>
+                        </a>
+                        <a href="orders.html" class="menu-item active">
+                            <i class="las la-shopping-bag"></i>
+                            <span>Pesanan Saya</span>
+                        </a>
+                        <a href="#" class="menu-item" id="logout-btn">
+                            <i class="las la-sign-out-alt"></i>
+                            <span>Keluar</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Orders Content -->
+                <div class="orders-content">
+                    <!-- Mobile Profile Menu -->
+                    <div class="mobile-profile-menu d-md-none">
+                        <div class="mobile-user-info">
+                            <div class="mobile-user-avatar">
+                                <img src="/placeholder.svg?height=50&width=50" alt="User Avatar" id="mobile-user-avatar">
+                            </div>
+                            <div class="mobile-user-details">
+                                <h4 id="mobile-user-name">User Name</h4>
+                                <p id="mobile-user-email">user@example.com</p>
+                            </div>
+                        </div>
+                        <div class="mobile-menu-tabs">
+                            <a href="profile.html" class="mobile-tab">
+                                <i class="las la-user"></i>
+                                <span>Profil</span>
+                            </a>
+                            <a href="orders.html" class="mobile-tab active">
+                                <i class="las la-shopping-bag"></i>
+                                <span>Pesanan</span>
+                            </a>
+                            <a href="#" class="mobile-tab" id="mobile-logout-btn">
+                                <i class="las la-sign-out-alt"></i>
+                                <span>Keluar</span>
+                            </a>
                         </div>
                     </div>
 
+                    <!-- Orders Stats -->
                     <div class="orders-stats">
                         <div class="stat-card">
                             <div class="stat-icon">
@@ -143,7 +136,7 @@
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon">
-                                <i class="las la-dollar-sign"></i>
+                                <i class="las la-wallet"></i>
                             </div>
                             <div class="stat-info">
                                 <h3 id="total-spent">Rp 0</h3>
@@ -152,87 +145,120 @@
                         </div>
                     </div>
 
+                    <!-- Orders Filter -->
+                    <div class="orders-filter">
+                        <div class="filter-group">
+                            <label for="order-status">Status Pesanan</label>
+                            <select id="order-status">
+                                <option value="all">Semua Status</option>
+                                <option value="pending">Menunggu Pembayaran</option>
+                                <option value="paid">Sudah Dibayar</option>
+                                <option value="processing">Sedang Diproses</option>
+                                <option value="shipped">Dikirim</option>
+                                <option value="delivered">Terkirim</option>
+                                <option value="completed">Selesai</option>
+                                <option value="cancelled">Dibatalkan</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="order-period">Periode</label>
+                            <select id="order-period">
+                                <option value="all">Semua Waktu</option>
+                                <option value="last-month">1 Bulan Terakhir</option>
+                                <option value="last-3-months">3 Bulan Terakhir</option>
+                                <option value="last-6-months">6 Bulan Terakhir</option>
+                            </select>
+                        </div>
+                        <div class="filter-group search-group">
+                            <label for="order-search">Cari Pesanan</label>
+                            <div class="search-input-group">
+                                <input type="text" placeholder="Cari nomor pesanan..." id="order-search">
+                                <button class="search-btn"><i class="las la-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Orders List -->
                     <div class="orders-list" id="orders-list">
                         <!-- Orders will be loaded dynamically -->
                     </div>
 
+                    <!-- Empty State -->
                     <div class="empty-state" id="empty-state" style="display: none;">
                         <div class="empty-icon">
                             <i class="las la-shopping-bag"></i>
                         </div>
                         <h3>Belum Ada Pesanan</h3>
                         <p>Anda belum memiliki pesanan. Mulai berbelanja sekarang!</p>
-                        <a href="shop.html" class="btn">Mulai Belanja</a>
-                    </div>
-
-                    <div class="pagination" id="pagination" style="display: none;">
-                        <button class="pagination-btn prev" id="prev-btn"><i class="las la-chevron-left"></i></button>
-                        <div class="pagination-numbers" id="pagination-numbers"></div>
-                        <button class="pagination-btn next" id="next-btn"><i class="las la-chevron-right"></i></button>
+                        <a href="shop.html" class="btn btn-primary">Mulai Berbelanja</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Order Detail Modal -->
     <div class="modal" id="order-detail-modal">
         <div class="modal-content order-detail">
-            <span class="close-modal">&times;</span>
-            <h2>Detail Pesanan <span id="detail-order-id"></span></h2>
+            <button class="modal-close" id="modal-close">
+                <i class="las la-times"></i>
+            </button>
+            <div class="modal-header">
+                <h2>Detail Pesanan</h2>
+                <span class="order-id" id="detail-order-id">#AMZ12345</span>
+            </div>
             
             <div class="order-detail-section">
-                <h3>Informasi Pesanan</h3>
+                <h3><i class="las la-info-circle"></i> Informasi Pesanan</h3>
                 <div class="detail-info-grid">
                     <div class="detail-info-item">
-                        <span class="detail-label">Status Pesanan:</span>
-                        <span class="detail-value" id="detail-status"></span>
+                        <span class="detail-label">Status Pesanan</span>
+                        <span class="detail-value" id="detail-status">Menunggu Pembayaran</span>
                     </div>
                     <div class="detail-info-item">
-                        <span class="detail-label">Tanggal Pesanan:</span>
-                        <span class="detail-value" id="detail-date"></span>
+                        <span class="detail-label">Tanggal Pesanan</span>
+                        <span class="detail-value" id="detail-date">-</span>
                     </div>
                     <div class="detail-info-item">
-                        <span class="detail-label">Metode Pembayaran:</span>
-                        <span class="detail-value" id="detail-payment"></span>
+                        <span class="detail-label">Metode Pembayaran</span>
+                        <span class="detail-value" id="detail-payment">-</span>
                     </div>
                     <div class="detail-info-item">
-                        <span class="detail-label">Status Pembayaran:</span>
-                        <span class="detail-value" id="detail-payment-status"></span>
+                        <span class="detail-label">Status Pembayaran</span>
+                        <span class="detail-value" id="detail-payment-status">-</span>
                     </div>
                 </div>
             </div>
 
             <div class="order-detail-section">
-                <h3>Alamat Pengiriman</h3>
+                <h3><i class="las la-map-marker-alt"></i> Alamat Pengiriman</h3>
                 <div class="shipping-address" id="shipping-address">
                     <!-- Address will be loaded dynamically -->
                 </div>
             </div>
 
             <div class="order-detail-section">
-                <h3>Produk yang Dibeli</h3>
+                <h3><i class="las la-shopping-cart"></i> Produk yang Dibeli</h3>
                 <div class="order-detail-products" id="detail-products">
                     <!-- Products will be loaded dynamically -->
                 </div>
             </div>
 
             <div class="order-detail-section">
-                <h3>Ringkasan Pembayaran</h3>
+                <h3><i class="las la-receipt"></i> Ringkasan Pembayaran</h3>
                 <div class="payment-summary" id="payment-summary">
                     <!-- Payment summary will be loaded dynamically -->
                 </div>
             </div>
 
             <div class="order-detail-actions">
-                <button class="btn-sm download-invoice" id="download-invoice">
-                    <i class="las la-download"></i> Unduh Invoice
+                <button class="btn btn-secondary" id="download-invoice">
+                    <i class="las la-download"></i>
+                    <span>Unduh Invoice</span>
                 </button>
-                <button class="btn-sm contact-support">
-                    <i class="las la-headset"></i> Hubungi Support
-                </button>
-                <button class="btn-sm buy-again" id="buy-again">
-                    <i class="las la-redo"></i> Beli Lagi
+                <button class="btn btn-primary" id="buy-again">
+                    <i class="las la-redo"></i>
+                    <span>Beli Lagi</span>
                 </button>
             </div>
         </div>
@@ -241,16 +267,21 @@
     <!-- Tracking Modal -->
     <div class="modal" id="tracking-modal">
         <div class="modal-content tracking">
-            <span class="close-modal">&times;</span>
-            <h2>Lacak Pengiriman</h2>
+            <button class="modal-close">
+                <i class="las la-times"></i>
+            </button>
+            <div class="modal-header">
+                <h2>Lacak Pengiriman</h2>
+            </div>
+            
             <div class="tracking-info">
                 <div class="tracking-header">
                     <div class="tracking-detail">
-                        <p><strong>Nomor Resi:</strong> <span id="tracking-number"></span></p>
-                        <p><strong>Kurir:</strong> <span id="courier-name"></span></p>
+                        <p><strong>Nomor Resi:</strong> <span id="tracking-number">-</span></p>
+                        <p><strong>Kurir:</strong> <span id="courier-name">-</span></p>
                     </div>
                     <div class="tracking-status">
-                        <span id="tracking-status"></span>
+                        <span id="tracking-status" class="status-shipped">Dalam Perjalanan</span>
                     </div>
                 </div>
                 
@@ -261,63 +292,8 @@
         </div>
     </div>
 
-    <!-- Review Modal -->
-    <div class="modal" id="review-modal">
-        <div class="modal-content review">
-            <span class="close-modal">&times;</span>
-            <h2>Beri Ulasan</h2>
-            <div class="review-products" id="review-products">
-                <!-- Review products will be loaded dynamically -->
-            </div>
-            <div class="review-actions">
-                <button class="btn submit-review" id="submit-review">Kirim Ulasan</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Payment Modal -->
-    <div class="modal" id="payment-modal">
-        <div class="modal-content payment">
-            <span class="close-modal">&times;</span>
-            <h2>Pembayaran</h2>
-            <div class="payment-info">
-                <div class="payment-detail">
-                    <h3>Detail Pesanan</h3>
-                    <p><strong>ID Pesanan:</strong> <span id="payment-order-id"></span></p>
-                    <p><strong>Total:</strong> <span id="payment-total"></span></p>
-                </div>
-                <div class="payment-methods">
-                    <h3>Pilih Metode Pembayaran</h3>
-                    <div class="payment-method">
-                        <input type="radio" id="bank-transfer" name="payment" value="bank-transfer" checked>
-                        <label for="bank-transfer">
-                            <i class="las la-university"></i>
-                            Transfer Bank
-                        </label>
-                    </div>
-                    <div class="payment-method">
-                        <input type="radio" id="e-wallet" name="payment" value="e-wallet">
-                        <label for="e-wallet">
-                            <i class="las la-wallet"></i>
-                            E-Wallet
-                        </label>
-                    </div>
-                    <div class="payment-method">
-                        <input type="radio" id="credit-card" name="payment" value="credit-card">
-                        <label for="credit-card">
-                            <i class="las la-credit-card"></i>
-                            Kartu Kredit
-                        </label>
-                    </div>
-                </div>
-                <div class="payment-actions">
-                    <button class="btn process-payment" id="process-payment">Proses Pembayaran</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer>
+    <!-- Footer - Hidden on Mobile -->
+    <footer class="desktop-footer">
         <div class="container">
             <div class="footer-container">
                 <div class="footer-col">
@@ -336,7 +312,6 @@
                         <li><a href="index.html">Home</a></li>
                         <li><a href="shop.html">Shop</a></li>
                         <li><a href="customize.html">Customize</a></li>
-                        <li><a href="profile.html">Profile</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -364,6 +339,6 @@
         </div>
     </footer>
 
-    <script src="js/orders.js"></script>
+    <script src="JS/orders.js"></script>
 </body>
 </html>

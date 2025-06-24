@@ -1251,3 +1251,9 @@ footer {
     margin-top: 5px;
   }
 }
+
+.profile-switch {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}

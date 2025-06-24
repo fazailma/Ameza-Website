@@ -49,14 +49,6 @@ class AdminDashboard {
       })
     })
 
-    // Sidebar toggle
-    const sidebarToggle = document.querySelector(".sidebar-toggle")
-    if (sidebarToggle) {
-      sidebarToggle.addEventListener("click", () => {
-        document.querySelector(".sidebar").classList.toggle("active")
-      })
-    }
-
     // Product management
     const addProductBtn = document.getElementById("add-product-btn")
     if (addProductBtn) {
@@ -187,13 +179,14 @@ class AdminDashboard {
     const userDropdown = document.querySelector(".user-dropdown")
 
     if (userInfo && userDropdown) {
-      userInfo.addEventListener("click", () => {
+      userInfo.addEventListener("click", (e) => {
+        e.stopPropagation()
         userDropdown.classList.toggle("active")
       })
 
       // Close dropdown when clicking outside
       document.addEventListener("click", (e) => {
-        if (!userInfo.contains(e.target) && !userDropdown.contains(e.target)) {
+        if (!userInfo.contains(e.target)) {
           userDropdown.classList.remove("active")
         }
       })
@@ -230,8 +223,10 @@ class AdminDashboard {
   }
 
   logout() {
-    localStorage.removeItem("ameza_current_user")
-    window.location.href = "../login.html"
+    if (confirm("Apakah Anda yakin ingin keluar?")) {
+      localStorage.removeItem("ameza_current_user")
+      window.location.href = "../login.html"
+    }
   }
 
   setupSidebarToggle() {
@@ -239,20 +234,12 @@ class AdminDashboard {
     const sidebar = document.querySelector(".sidebar")
     const mainContent = document.querySelector(".main-content")
     const mobileToggle = document.querySelector(".mobile-toggle")
-    const logo = document.querySelector(".logo a")
 
     if (sidebarToggle && sidebar && mainContent) {
       sidebarToggle.addEventListener("click", () => {
         sidebar.classList.toggle("collapsed")
         mainContent.classList.toggle("expanded")
         this.sidebarCollapsed = sidebar.classList.contains("collapsed")
-
-        // Sembunyikan teks logo saat collapsed
-        if (this.sidebarCollapsed && logo) {
-          logo.style.fontSize = "0"
-        } else if (logo) {
-          logo.style.fontSize = "1.8rem"
-        }
       })
     }
 
@@ -261,10 +248,18 @@ class AdminDashboard {
         sidebar.classList.toggle("active")
       })
     }
+
+    // Close mobile sidebar when clicking outside
+    document.addEventListener("click", (e) => {
+      if (window.innerWidth <= 768) {
+        if (!sidebar.contains(e.target) && !mobileToggle.contains(e.target)) {
+          sidebar.classList.remove("active")
+        }
+      }
+    })
   }
 
   switchPage(page) {
-    // Jangan lakukan apa-apa jika halaman sama
     if (this.currentPage === page) return
 
     // Update navigation
@@ -276,44 +271,39 @@ class AdminDashboard {
       targetNav.closest(".nav-item").classList.add("active")
     }
 
-    // Fade out halaman lama
+    // Hide current page
     const oldPage = document.getElementById(`${this.currentPage}-page`)
     if (oldPage) {
-      oldPage.style.opacity = "0"
+      oldPage.classList.remove("active")
     }
 
-    // Tunggu sebentar sebelum mengganti halaman
-    setTimeout(() => {
-      // Update page content
-      document.querySelectorAll(".page-content").forEach((content) => {
-        content.classList.remove("active")
-      })
-      const targetPage = document.getElementById(`${page}-page`)
-      if (targetPage) {
-        targetPage.classList.add("active")
-        // Fade in halaman baru
-        setTimeout(() => {
-          targetPage.style.opacity = "1"
-        }, 50)
-      }
+    // Show new page
+    const targetPage = document.getElementById(`${page}-page`)
+    if (targetPage) {
+      targetPage.classList.add("active")
+    }
 
-      // Update page title
-      const titles = {
-        dashboard: "Dashboard",
-        products: "Kelola Produk",
-        articles: "Kelola Artikel",
-        transactions: "Kelola Transaksi",
-        customers: "Kelola Pelanggan",
-        users: "Kelola Pengguna",
-        settings: "Pengaturan",
-      }
-      const pageTitle = document.getElementById("page-title")
-      if (pageTitle) {
-        pageTitle.textContent = titles[page] || page
-      }
+    // Update page title
+    const titles = {
+      dashboard: "Dashboard",
+      products: "Kelola Produk",
+      articles: "Kelola Artikel",
+      transactions: "Kelola Transaksi",
+      customers: "Kelola Pelanggan",
+      users: "Kelola Pengguna",
+      settings: "Pengaturan",
+    }
+    const pageTitle = document.getElementById("page-title")
+    if (pageTitle) {
+      pageTitle.textContent = titles[page] || page
+    }
 
-      this.currentPage = page
-    }, 200)
+    this.currentPage = page
+
+    // Close mobile sidebar after navigation
+    if (window.innerWidth <= 768) {
+      document.querySelector(".sidebar").classList.remove("active")
+    }
   }
 
   loadInitialData() {
@@ -489,7 +479,7 @@ class AdminDashboard {
           password: "admin123",
           role: "admin",
           createdAt: "2023-01-01",
-          avatar: "../images/avatar.jpg",
+          avatar: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-REHji32IhsEiv5DZx5FrCe2YXRMvpW.png",
           bio: "Administrator sistem Ameza Fashion",
         },
         {
@@ -558,7 +548,7 @@ class AdminDashboard {
       const row = document.createElement("tr")
       row.innerHTML = `
         <td>
-          <img src="${product.image}" alt="${product.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
+          <img src="${product.image}" alt="${product.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px;">
         </td>
         <td>${product.name}</td>
         <td>${this.getCategoryName(product.category)}</td>
@@ -566,10 +556,10 @@ class AdminDashboard {
         <td>${product.discount || 0}%</td>
         <td>${product.stock}</td>
         <td>
-          <button class="btn-sm" onclick="adminDashboard.editProduct(${product.id})">
+          <button class="btn btn-sm" onclick="adminDashboard.editProduct(${product.id})">
             <i class="las la-edit"></i>
           </button>
-          <button class="btn-sm btn-danger" onclick="adminDashboard.deleteProduct(${product.id})">
+          <button class="btn btn-sm btn-danger" onclick="adminDashboard.deleteProduct(${product.id})">
             <i class="las la-trash"></i>
           </button>
         </td>
@@ -588,7 +578,7 @@ class AdminDashboard {
       const row = document.createElement("tr")
       row.innerHTML = `
         <td>
-          <img src="${article.image}" alt="${article.title}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
+          <img src="${article.image}" alt="${article.title}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px;">
         </td>
         <td>${article.title}</td>
         <td>${new Date(article.date).toLocaleDateString("id-ID")}</td>
@@ -596,10 +586,10 @@ class AdminDashboard {
           <span class="status-${article.status}">${article.status === "published" ? "Dipublikasi" : "Draft"}</span>
         </td>
         <td>
-          <button class="btn-sm" onclick="adminDashboard.editArticle(${article.id})">
+          <button class="btn btn-sm" onclick="adminDashboard.editArticle(${article.id})">
             <i class="las la-edit"></i>
           </button>
-          <button class="btn-sm btn-danger" onclick="adminDashboard.deleteArticle(${article.id})">
+          <button class="btn btn-sm btn-danger" onclick="adminDashboard.deleteArticle(${article.id})">
             <i class="las la-trash"></i>
           </button>
         </td>
@@ -632,10 +622,10 @@ class AdminDashboard {
         </td>
         <td>${new Date(transaction.date).toLocaleDateString("id-ID")}</td>
         <td>
-          <button class="btn-sm" onclick="adminDashboard.editTransaction(${transaction.id})">
+          <button class="btn btn-sm" onclick="adminDashboard.editTransaction(${transaction.id})">
             <i class="las la-edit"></i>
           </button>
-          <button class="btn-sm btn-danger" onclick="adminDashboard.deleteTransaction(${transaction.id})">
+          <button class="btn btn-sm btn-danger" onclick="adminDashboard.deleteTransaction(${transaction.id})">
             <i class="las la-trash"></i>
           </button>
         </td>
@@ -657,14 +647,14 @@ class AdminDashboard {
         <td>${user.email}</td>
         <td>${user.phone}</td>
         <td>
-          <span class="role-${user.role}">${user.role === "admin" ? "Admin" : "User"}</span>
+          <span class="status-${user.role}">${user.role === "admin" ? "Admin" : "User"}</span>
         </td>
         <td>${new Date(user.createdAt).toLocaleDateString("id-ID")}</td>
         <td>
-          <button class="btn-sm" onclick="adminDashboard.editUser(${user.id})">
+          <button class="btn btn-sm" onclick="adminDashboard.editUser(${user.id})">
             <i class="las la-edit"></i>
           </button>
-          <button class="btn-sm btn-danger" onclick="adminDashboard.deleteUser(${user.id})">
+          <button class="btn btn-sm btn-danger" onclick="adminDashboard.deleteUser(${user.id})">
             <i class="las la-trash"></i>
           </button>
         </td>
@@ -806,6 +796,7 @@ class AdminDashboard {
     this.loadProducts()
     this.updateStats()
     this.closeProductModal()
+    this.showNotification("Produk berhasil disimpan!", "success")
   }
 
   editProduct(id) {
@@ -818,6 +809,7 @@ class AdminDashboard {
       this.saveProducts()
       this.loadProducts()
       this.updateStats()
+      this.showNotification("Produk berhasil dihapus!", "success")
     }
   }
 
@@ -885,6 +877,7 @@ class AdminDashboard {
     this.loadArticles()
     this.updateStats()
     this.closeArticleModal()
+    this.showNotification("Artikel berhasil disimpan!", "success")
   }
 
   editArticle(id) {
@@ -897,6 +890,7 @@ class AdminDashboard {
       this.saveArticles()
       this.loadArticles()
       this.updateStats()
+      this.showNotification("Artikel berhasil dihapus!", "success")
     }
   }
 
@@ -986,6 +980,7 @@ class AdminDashboard {
     this.loadRecentTransactions()
     this.updateStats()
     this.closeTransactionModal()
+    this.showNotification("Transaksi berhasil disimpan!", "success")
   }
 
   editTransaction(id) {
@@ -999,6 +994,7 @@ class AdminDashboard {
       this.loadTransactions()
       this.loadRecentTransactions()
       this.updateStats()
+      this.showNotification("Transaksi berhasil dihapus!", "success")
     }
   }
 
@@ -1073,6 +1069,7 @@ class AdminDashboard {
     this.loadCustomers()
     this.updateStats()
     this.closeUserModal()
+    this.showNotification("Pengguna berhasil disimpan!", "success")
   }
 
   editUser(id) {
@@ -1086,6 +1083,7 @@ class AdminDashboard {
       this.loadUsers()
       this.loadCustomers()
       this.updateStats()
+      this.showNotification("Pengguna berhasil dihapus!", "success")
     }
   }
 
@@ -1133,27 +1131,27 @@ class AdminDashboard {
     // Validate password change if provided
     if (currentPassword || newPassword || confirmPassword) {
       if (!currentPassword) {
-        alert("Harap masukkan password saat ini.")
+        this.showNotification("Harap masukkan password saat ini.", "error")
         return
       }
 
       if (currentUser.password !== currentPassword) {
-        alert("Password saat ini tidak benar.")
+        this.showNotification("Password saat ini tidak benar.", "error")
         return
       }
 
       if (!newPassword) {
-        alert("Harap masukkan password baru.")
+        this.showNotification("Harap masukkan password baru.", "error")
         return
       }
 
       if (newPassword !== confirmPassword) {
-        alert("Password baru dan konfirmasi password tidak cocok.")
+        this.showNotification("Password baru dan konfirmasi password tidak cocok.", "error")
         return
       }
 
       if (newPassword.length < 6) {
-        alert("Password baru harus minimal 6 karakter.")
+        this.showNotification("Password baru harus minimal 6 karakter.", "error")
         return
       }
     }
@@ -1198,7 +1196,7 @@ class AdminDashboard {
       })
     }
 
-    alert("Profil berhasil diperbarui!")
+    this.showNotification("Profil berhasil diperbarui!", "success")
     this.closeAdminProfileModal()
   }
 
@@ -1245,7 +1243,6 @@ class AdminDashboard {
   }
 
   showLoading() {
-    // Tambahkan loading indicator jika diperlukan
     const loadingElement = document.createElement("div")
     loadingElement.id = "loading-indicator"
     loadingElement.innerHTML = `
@@ -1261,6 +1258,55 @@ class AdminDashboard {
     if (loadingElement) {
       loadingElement.remove()
     }
+  }
+
+  showNotification(message, type = "info") {
+    // Create notification element
+    const notification = document.createElement("div")
+    notification.className = `notification notification-${type}`
+    notification.innerHTML = `
+      <div class="notification-content">
+        <i class="las ${type === "success" ? "la-check-circle" : type === "error" ? "la-exclamation-circle" : "la-info-circle"}"></i>
+        <span>${message}</span>
+      </div>
+    `
+
+    // Add styles
+    notification.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: ${type === "success" ? "#28a745" : type === "error" ? "#dc3545" : "#17a2b8"};
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    `
+
+    document.body.appendChild(notification)
+
+    // Animate in
+    setTimeout(() => {
+      notification.style.transform = "translateX(0)"
+    }, 100)
+
+    // Remove after 3 seconds
+    setTimeout(() => {
+      notification.style.transform = "translateX(100%)"
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.parentNode.removeChild(notification)
+        }
+      }, 300)
+    }, 3000)
   }
 }
 

@@ -4,58 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - Ameza Fashion</title>
+    <!-- Line Awesome Icons -->
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/checkout.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header>
+    <!-- Header -->
+    <header class="sticky-top">
         <div class="container">
-            <div class="navbar">
-                <div class="logo">
-                    <a href="index.html">Ameza<span>Fashion</span></a>
+            <div class="navbar-custom">
+                <!-- Desktop Header -->
+                <div class="logo d-none d-md-block">
+                    <a href="index.html">Ameza<span>.</span></a>
                 </div>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="customize.html">Customize</a></li>
+                <ul class="nav-links d-none d-md-flex">
+                    <li><a href="index.html" class="nav-item">Home</a></li>
+                    <li><a href="shop.html" class="nav-item">Shop</a></li>
+                    <li><a href="customize.html" class="nav-item">Customize</a></li>
+                    <li><a href="blog.html" class="nav-item">Artikel</a></li>
                 </ul>
-                <div class="icons">
-                    <a href="profile.html"><i class="fas fa-user"></i></a>
-                    <a href="cart.html"><i class="fas fa-shopping-cart"></i> <span id="cart-count">2</span></a>
+                <div class="header-icons d-none d-md-flex">
+                    <a href="cart.html" class="icon-with-badge">
+                        <i class="las la-shopping-cart"></i>
+                        <span class="badge" id="cart-count">0</span>
+                    </a>
+                    <a href="profile.html"><i class="las la-user"></i></a>
                 </div>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
+
+                <!-- Mobile Header -->
+                <div class="mobile-header d-md-none">
+                    <button class="back-btn" onclick="history.back()">
+                        <i class="las la-arrow-left"></i>
+                    </button>
+                    <h1 class="mobile-page-title">Checkout</h1>
+                    <div class="mobile-header-icons">
+                        <a href="cart.html" class="icon-with-badge">
+                            <i class="las la-shopping-cart"></i>
+                            <span class="badge" id="cart-count-mobile">0</span>
+                        </a>
+                        <a href="profile.html"><i class="las la-user"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <section class="checkout-banner">
+    <!-- Checkout Banner - Hidden on Mobile -->
+    <section class="checkout-banner d-none d-md-block">
         <div class="container">
             <h1>Checkout</h1>
             <p>Selesaikan pembelian Anda</p>
         </div>
     </section>
 
+    <!-- Checkout Section -->
     <section class="checkout-section">
         <div class="container">
+            <!-- Progress Steps -->
             <div class="checkout-progress">
-                <div class="progress-step active">
+                <div class="progress-step active" data-step="1">
                     <div class="step-number">1</div>
-                    <div class="step-label">Ringkasan Pesanan</div>
+                    <div class="step-label">Ringkasan</div>
                 </div>
                 <div class="progress-line"></div>
-                <div class="progress-step">
+                <div class="progress-step" data-step="2">
                     <div class="step-number">2</div>
-                    <div class="step-label">Alamat Pengiriman</div>
+                    <div class="step-label">Alamat</div>
                 </div>
                 <div class="progress-line"></div>
-                <div class="progress-step">
+                <div class="progress-step" data-step="3">
                     <div class="step-number">3</div>
-                    <div class="step-label">Metode Pembayaran</div>
+                    <div class="step-label">Pembayaran</div>
                 </div>
                 <div class="progress-line"></div>
-                <div class="progress-step">
+                <div class="progress-step" data-step="4">
                     <div class="step-number">4</div>
                     <div class="step-label">Konfirmasi</div>
                 </div>
@@ -64,85 +87,80 @@
             <div class="checkout-container">
                 <!-- Step 1: Order Summary -->
                 <div class="checkout-step active" id="step-1">
-                    <h2>Ringkasan Pesanan</h2>
-                    <div class="order-items">
-                        <div class="order-item">
-                            <div class="item-image">
-                                <img src="images/tops/top1.png" alt="Basic T-Shirt">
-                            </div>
-                            <div class="item-details">
-                                <h3>Basic T-Shirt</h3>
-                                <p class="item-category">Kategori: Tops</p>
-                                <p class="item-size">Ukuran: M</p>
-                                <p class="item-color">Warna: Hitam</p>
-                                <p class="item-quantity">Jumlah: 1</p>
-                                <p class="item-price">Rp 150.000</p>
-                            </div>
-                        </div>
-                        <div class="order-item">
-                            <div class="item-image">
-                                <img src="images/bottoms/bottom1.png" alt="Classic Jeans">
-                            </div>
-                            <div class="item-details">
-                                <h3>Classic Jeans</h3>
-                                <p class="item-category">Kategori: Bottoms</p>
-                                <p class="item-size">Ukuran: L</p>
-                                <p class="item-color">Warna: Biru</p>
-                                <p class="item-quantity">Jumlah: 1</p>
-                                <p class="item-price">Rp 250.000</p>
-                            </div>
-                        </div>
+                    <div class="step-header">
+                        <h2>Ringkasan Pesanan</h2>
+                        <p class="step-subtitle">Periksa kembali produk yang akan dibeli</p>
                     </div>
+                    
+                    <div class="order-items" id="order-items">
+                        <!-- Items will be loaded dynamically -->
+                    </div>
+
                     <div class="order-summary">
                         <div class="summary-row">
-                            <span>Subtotal</span>
-                            <span>Rp 400.000</span>
+                            <span>Subtotal (<span id="summary-item-count">0</span> item)</span>
+                            <span id="summary-subtotal">Rp 0</span>
                         </div>
                         <div class="summary-row">
-                            <span>Pengiriman</span>
-                            <span>Rp 20.000</span>
+                            <span>Ongkos Kirim</span>
+                            <span id="summary-shipping">Rp 20.000</span>
                         </div>
                         <div class="summary-row">
                             <span>Diskon</span>
-                            <span>- Rp 0</span>
+                            <span id="summary-discount">- Rp 0</span>
                         </div>
+                        <div class="summary-divider"></div>
                         <div class="summary-row total">
                             <span>Total</span>
-                            <span>Rp 420.000</span>
+                            <span id="summary-total">Rp 20.000</span>
                         </div>
                     </div>
+
                     <div class="step-actions">
-                        <a href="cart.html" class="btn secondary">Kembali ke Keranjang</a>
-                        <button class="btn next-step" data-step="2">Lanjutkan ke Alamat</button>
+                        <a href="cart.html" class="btn btn-secondary">
+                            <i class="las la-arrow-left"></i>
+                            <span>Keranjang</span>
+                        </a>
+                        <button class="btn btn-primary next-step" data-next="2">
+                            <span>Lanjut Alamat</span>
+                            <i class="las la-arrow-right"></i>
+                        </button>
                     </div>
                 </div>
 
                 <!-- Step 2: Shipping Address -->
                 <div class="checkout-step" id="step-2">
-                    <h2>Alamat Pengiriman</h2>
-                    <div class="address-form">
+                    <div class="step-header">
+                        <h2>Alamat Pengiriman</h2>
+                        <p class="step-subtitle">Masukkan alamat lengkap untuk pengiriman</p>
+                    </div>
+
+                    <form class="address-form" id="address-form">
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="fullname">Nama Lengkap</label>
-                                <input type="text" id="fullname" placeholder="Masukkan nama lengkap">
+                                <label for="fullname">Nama Lengkap *</label>
+                                <input type="text" id="fullname" name="fullname" required>
                             </div>
                             <div class="form-group">
-                                <label for="phone">Nomor Telepon</label>
-                                <input type="tel" id="phone" placeholder="Masukkan nomor telepon">
+                                <label for="phone">Nomor Telepon *</label>
+                                <input type="tel" id="phone" name="phone" required>
                             </div>
                         </div>
+                        
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" placeholder="Masukkan email">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
                         </div>
+                        
                         <div class="form-group">
-                            <label for="address">Alamat Lengkap</label>
-                            <textarea id="address" rows="3" placeholder="Masukkan alamat lengkap"></textarea>
+                            <label for="address">Alamat Lengkap *</label>
+                            <textarea id="address" name="address" rows="3" required placeholder="Jalan, nomor rumah, RT/RW"></textarea>
                         </div>
+                        
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="province">Provinsi</label>
-                                <select id="province">
+                                <label for="province">Provinsi *</label>
+                                <select id="province" name="province" required>
                                     <option value="">Pilih Provinsi</option>
                                     <option value="jakarta">DKI Jakarta</option>
                                     <option value="jawa-barat">Jawa Barat</option>
@@ -152,170 +170,218 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="city">Kota/Kabupaten</label>
-                                <select id="city">
+                                <label for="city">Kota/Kabupaten *</label>
+                                <select id="city" name="city" required>
                                     <option value="">Pilih Kota/Kabupaten</option>
                                 </select>
                             </div>
                         </div>
+                        
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="district">Kecamatan</label>
-                                <select id="district">
+                                <label for="district">Kecamatan *</label>
+                                <select id="district" name="district" required>
                                     <option value="">Pilih Kecamatan</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="postal-code">Kode Pos</label>
-                                <input type="text" id="postal-code" placeholder="Masukkan kode pos">
+                                <label for="postal-code">Kode Pos *</label>
+                                <input type="text" id="postal-code" name="postal-code" required>
                             </div>
                         </div>
+                        
                         <div class="form-group">
                             <label for="shipping-notes">Catatan Pengiriman (Opsional)</label>
-                            <textarea id="shipping-notes" rows="2" placeholder="Tambahkan catatan untuk pengiriman"></textarea>
+                            <textarea id="shipping-notes" name="shipping-notes" rows="2" placeholder="Instruksi khusus untuk kurir"></textarea>
                         </div>
-                    </div>
+                    </form>
+
                     <div class="step-actions">
-                        <button class="btn secondary prev-step" data-step="1">Kembali</button>
-                        <button class="btn next-step" data-step="3">Lanjutkan ke Pembayaran</button>
+                        <button class="btn btn-secondary prev-step" data-prev="1">
+                            <i class="las la-arrow-left"></i>
+                            <span>Kembali</span>
+                        </button>
+                        <button class="btn btn-primary next-step" data-next="3">
+                            <span>Lanjut Bayar</span>
+                            <i class="las la-arrow-right"></i>
+                        </button>
                     </div>
                 </div>
 
                 <!-- Step 3: Payment Method -->
                 <div class="checkout-step" id="step-3">
-                    <h2>Metode Pembayaran</h2>
-                    <div class="payment-options">
-                        <div class="payment-methods">
-                            <div class="payment-method">
-                                <input type="radio" name="payment" id="bca" value="bca">
-                                <label for="bca">
-                                    <img src="images/payment/bca.png" alt="BCA">
-                                    <span>Bank BCA</span>
-                                </label>
-                            </div>
-                            <div class="payment-method">
-                                <input type="radio" name="payment" id="mandiri" value="mandiri">
-                                <label for="mandiri">
-                                    <img src="images/payment/mandiri.png" alt="Mandiri">
-                                    <span>Bank Mandiri</span>
-                                </label>
-                            </div>
-                            <div class="payment-method">
-                                <input type="radio" name="payment" id="bni" value="bni">
-                                <label for="bni">
-                                    <img src="images/payment/bni.png" alt="BNI">
-                                    <span>Bank BNI</span>
-                                </label>
-                            </div>
-                            <div class="payment-method">
-                                <input type="radio" name="payment" id="gopay" value="gopay">
-                                <label for="gopay">
-                                    <img src="images/payment/gopay.png" alt="GoPay">
-                                    <span>GoPay</span>
-                                </label>
-                            </div>
-                        </div>
+                    <div class="step-header">
+                        <h2>Metode Pembayaran</h2>
+                        <p class="step-subtitle">Pilih metode pembayaran yang diinginkan</p>
+                    </div>
 
-                        <div class="payment-details" id="payment-details">
-                            <!-- Payment details will be shown here based on selected payment method -->
+                    <div class="payment-methods">
+                        <div class="payment-method">
+                            <input type="radio" name="payment" id="bca" value="bca">
+                            <label for="bca">
+                                <div class="payment-icon">
+                                    <i class="las la-university"></i>
+                                </div>
+                                <div class="payment-info">
+                                    <span class="payment-name">Bank BCA</span>
+                                    <span class="payment-desc">Transfer Bank</span>
+                                </div>
+                            </label>
+                        </div>
+                        
+                        <div class="payment-method">
+                            <input type="radio" name="payment" id="mandiri" value="mandiri">
+                            <label for="mandiri">
+                                <div class="payment-icon">
+                                    <i class="las la-university"></i>
+                                </div>
+                                <div class="payment-info">
+                                    <span class="payment-name">Bank Mandiri</span>
+                                    <span class="payment-desc">Transfer Bank</span>
+                                </div>
+                            </label>
+                        </div>
+                        
+                        <div class="payment-method">
+                            <input type="radio" name="payment" id="bni" value="bni">
+                            <label for="bni">
+                                <div class="payment-icon">
+                                    <i class="las la-university"></i>
+                                </div>
+                                <div class="payment-info">
+                                    <span class="payment-name">Bank BNI</span>
+                                    <span class="payment-desc">Transfer Bank</span>
+                                </div>
+                            </label>
+                        </div>
+                        
+                        <div class="payment-method">
+                            <input type="radio" name="payment" id="gopay" value="gopay">
+                            <label for="gopay">
+                                <div class="payment-icon">
+                                    <i class="las la-mobile"></i>
+                                </div>
+                                <div class="payment-info">
+                                    <span class="payment-name">GoPay</span>
+                                    <span class="payment-desc">E-Wallet</span>
+                                </div>
+                            </label>
                         </div>
                     </div>
+
+                    <div class="payment-details" id="payment-details">
+                        <!-- Payment details will be shown here -->
+                    </div>
+
                     <div class="step-actions">
-                        <button class="btn secondary prev-step" data-step="2">Kembali</button>
-                        <button class="btn next-step" data-step="4" id="payment-next-btn" disabled>Lanjutkan ke Konfirmasi</button>
+                        <button class="btn btn-secondary prev-step" data-prev="2">
+                            <i class="las la-arrow-left"></i>
+                            <span>Kembali</span>
+                        </button>
+                        <button class="btn btn-primary next-step" data-next="4" id="payment-next-btn" disabled>
+                            <span>Konfirmasi</span>
+                            <i class="las la-arrow-right"></i>
+                        </button>
                     </div>
                 </div>
 
                 <!-- Step 4: Confirmation -->
                 <div class="checkout-step" id="step-4">
-                    <h2>Konfirmasi Pesanan</h2>
-                    <div class="confirmation-details">
+                    <div class="step-header">
+                        <h2>Konfirmasi Pesanan</h2>
+                        <p class="step-subtitle">Periksa kembali detail pesanan Anda</p>
+                    </div>
+
+                    <div class="confirmation-sections">
                         <div class="confirmation-section">
-                            <h3>Ringkasan Pesanan</h3>
-                            <div class="confirmation-items">
-                                <div class="confirmation-item">
-                                    <span>2 Produk</span>
-                                    <span>Rp 400.000</span>
-                                </div>
-                                <div class="confirmation-item">
-                                    <span>Pengiriman</span>
-                                    <span>Rp 20.000</span>
-                                </div>
-                                <div class="confirmation-item">
-                                    <span>Diskon</span>
-                                    <span>- Rp 0</span>
-                                </div>
-                                <div class="confirmation-item total">
-                                    <span>Total</span>
-                                    <span>Rp 420.000</span>
+                            <h3><i class="las la-shopping-bag"></i> Ringkasan Pesanan</h3>
+                            <div class="confirmation-content">
+                                <div class="confirmation-items" id="confirmation-items">
+                                    <!-- Will be filled dynamically -->
                                 </div>
                             </div>
                         </div>
+
                         <div class="confirmation-section">
-                            <h3>Alamat Pengiriman</h3>
-                            <div class="confirmation-address" id="confirmation-address">
-                                <!-- Address will be filled dynamically -->
-                                <p><strong>Nama:</strong> <span id="conf-name">-</span></p>
-                                <p><strong>Telepon:</strong> <span id="conf-phone">-</span></p>
-                                <p><strong>Alamat:</strong> <span id="conf-address">-</span></p>
-                                <p><strong>Kota:</strong> <span id="conf-city">-</span></p>
-                                <p><strong>Kode Pos:</strong> <span id="conf-postal">-</span></p>
+                            <h3><i class="las la-map-marker"></i> Alamat Pengiriman</h3>
+                            <div class="confirmation-content" id="confirmation-address">
+                                <!-- Will be filled dynamically -->
                             </div>
                         </div>
+
                         <div class="confirmation-section">
-                            <h3>Metode Pembayaran</h3>
-                            <div class="confirmation-payment" id="confirmation-payment">
-                                <!-- Payment method will be filled dynamically -->
-                                <p><strong>Metode:</strong> <span id="conf-payment-method">-</span></p>
-                                <p><strong>Detail:</strong> <span id="conf-payment-detail">-</span></p>
+                            <h3><i class="las la-credit-card"></i> Metode Pembayaran</h3>
+                            <div class="confirmation-content" id="confirmation-payment">
+                                <!-- Will be filled dynamically -->
                             </div>
                         </div>
                     </div>
-                    <div class="security-code-section">
-                        <h3>Kode Keamanan</h3>
+
+                    <div class="security-section">
+                        <h3><i class="las la-shield-alt"></i> Kode Keamanan</h3>
                         <p>Masukkan kode keamanan untuk menyelesaikan pembayaran</p>
-                        <div class="security-code">
-                            <input type="password" placeholder="Kode Keamanan" id="security-code">
+                        <div class="security-input">
+                            <input type="password" id="security-code" placeholder="Masukkan kode keamanan" maxlength="6">
                         </div>
                     </div>
+
                     <div class="step-actions">
-                        <button class="btn secondary prev-step" data-step="3">Kembali</button>
-                        <button class="btn" id="confirm-order-btn">Konfirmasi Pesanan</button>
+                        <button class="btn btn-secondary prev-step" data-prev="3">
+                            <i class="las la-arrow-left"></i>
+                            <span>Kembali</span>
+                        </button>
+                        <button class="btn btn-primary" id="confirm-order-btn">
+                            <i class="las la-check-circle"></i>
+                            <span>Konfirmasi</span>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Order Success Modal -->
+    <!-- Success Modal -->
     <div class="modal" id="success-modal">
-        <div class="modal-content success">
-            <span class="close-modal">&times;</span>
-            <div class="success-icon">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <h2>Pesanan Berhasil!</h2>
-            <p>Terima kasih atas pesanan Anda. Nomor pesanan: <strong>#AMZ12345</strong></p>
-            <p>Kami akan segera memproses pesanan Anda.</p>
-            
-            <div class="success-actions">
-                <a href="orders.html" class="view-order-btn">Lihat Pesanan</a>
-                <a href="shop.html" class="continue-shopping">Lanjutkan Belanja</a>
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">
+                <i class="las la-times"></i>
+            </button>
+            <div class="success-content">
+                <div class="success-icon">
+                    <i class="las la-check-circle"></i>
+                </div>
+                <h2>Pesanan Berhasil!</h2>
+                <p>Terima kasih atas pesanan Anda.</p>
+                <div class="order-info">
+                    <p><strong>Nomor Pesanan:</strong> <span id="order-number">#AMZ12345</span></p>
+                    <p>Kami akan segera memproses pesanan Anda dan mengirimkan konfirmasi melalui email.</p>
+                </div>
+                <div class="success-actions">
+                    <a href="orders.html" class="btn btn-primary">
+                        <i class="las la-list"></i>
+                        Lihat Pesanan
+                    </a>
+                    <a href="shop.html" class="btn btn-secondary">
+                        <i class="las la-shopping-bag"></i>
+                        Lanjutkan Belanja
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
-    <footer>
+    <!-- Footer - Hidden on Mobile -->
+    <footer class="desktop-footer">
         <div class="container">
             <div class="footer-container">
                 <div class="footer-col">
                     <h3>Ameza Fashion</h3>
                     <p>Definisikan gaya Anda dengan koleksi pakaian berkualitas tinggi dan personal dari Ameza Fashion.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="lab la-facebook-f"></i></a>
+                        <a href="#"><i class="lab la-twitter"></i></a>
+                        <a href="#"><i class="lab la-instagram"></i></a>
+                        <a href="#"><i class="lab la-pinterest"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -339,9 +405,9 @@
                 <div class="footer-col">
                     <h3>Kontak</h3>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> Jl. Fashion No. 123, Jakarta</li>
-                        <li><i class="fas fa-phone"></i> +62 123 4567 890</li>
-                        <li><i class="fas fa-envelope"></i> info@amezafashion.com</li>
+                        <li><i class="las la-map-marker"></i> Jl. Fashion No. 123, Jakarta</li>
+                        <li><i class="las la-phone"></i> +62 123 4567 890</li>
+                        <li><i class="las la-envelope"></i> info@amezafashion.com</li>
                     </ul>
                 </div>
             </div>
@@ -351,6 +417,6 @@
         </div>
     </footer>
 
-    <script src="js/checkout.js"></script>
+    <script src="JS/checkout.js"></script>
 </body>
 </html>

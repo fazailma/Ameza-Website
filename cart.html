@@ -3,150 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop - Ameza Fashion</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Keranjang Belanja - Ameza Fashion</title>
     <!-- Line Awesome Icons -->
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/cart.css">
 </head>
 <body>
-    <header>
+    <!-- Header -->
+    <header class="sticky-top">
         <div class="container">
             <div class="navbar-custom">
-                <div class="logo">
+                <!-- Desktop Header -->
+                <div class="logo d-none d-md-block">
                     <a href="index.html">Ameza<span>.</span></a>
                 </div>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="shop.html" class="active">Shop</a></li>
-                    <li><a href="customize.html">Customize</a></li>
-                    <li><a href="blog.html">Artikel</a></li>
+                <ul class="nav-links d-none d-md-flex">
+                    <li><a href="index.html" class="nav-item">Home</a></li>
+                    <li><a href="shop.html" class="nav-item">Shop</a></li>
+                    <li><a href="customize.html" class="nav-item">Customize</a></li>
+                    <li><a href="blog.html" class="nav-item">Artikel</a></li>
                 </ul>
-                <div class="header-icons">
-                    <a href="cart.html" class="icon-with-badge">
+                <div class="header-icons d-none d-md-flex">
+                    <a href="cart.html" class="icon-with-badge active">
                         <i class="las la-shopping-cart"></i>
                         <span class="badge" id="cart-count">0</span>
                     </a>
                     <a href="profile.html"><i class="las la-user"></i></a>
                 </div>
-                <div class="mobile-menu">
-                    <i class="las la-bars"></i>
+
+                <!-- Mobile Header -->
+                <div class="mobile-header d-md-none">
+                    <button class="back-btn" onclick="history.back()">
+                        <i class="las la-arrow-left"></i>
+                    </button>
+                    <h1 class="mobile-page-title">Keranjang</h1>
+                    <div class="mobile-header-icons">
+                        <a href="cart.html" class="icon-with-badge active">
+                            <i class="las la-shopping-cart"></i>
+                            <span class="badge" id="cart-count-mobile">0</span>
+                        </a>
+                        <a href="profile.html"><i class="las la-user"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <div class="mobile-menu-container">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="shop.html">Shop</a></li>
-            <li><a href="customize.html">Customize</a></li>
-        </ul>
-    </div>
-
-    <section class="cart-banner">
-        <div class="container">
-            <h1>Keranjang Belanja</h1>
-            <p>Selesaikan pembelian Anda</p>
-        </div>
-    </section>
-
+    <!-- Cart Section -->
     <section class="cart-section">
         <div class="container">
             <div class="cart-container">
+                <!-- Cart Items -->
                 <div class="cart-items">
-                    <h2>Produk dalam Keranjang</h2>
+                    <!-- Mobile item count -->
+                    <div class="mobile-item-count d-md-none">
+                        <span>(<span id="mobile-total-items">0</span> item)</span>
+                    </div>
                     
-                    <div class="cart-item">
-                        <div class="item-image">
-                            <img src="images/tops/top1.png" alt="Basic T-Shirt">
-                        </div>
-                        <div class="item-details">
-                            <h3>Basic T-Shirt</h3>
-                            <p class="item-category">Kategori: Tops</p>
-                            <p class="item-size">Ukuran: M</p>
-                            <p class="item-color">Warna: Hitam</p>
-                        </div>
-                        <div class="item-quantity">
-                            <button class="quantity-btn minus"><i class="fas fa-minus"></i></button>
-                            <input type="number" value="1" min="1" max="10" class="quantity-input">
-                            <button class="quantity-btn plus"><i class="fas fa-plus"></i></button>
-                        </div>
-                        <div class="item-price">Rp 150.000</div>
-                        <div class="item-remove">
-                            <button class="remove-btn"><i class="fas fa-trash"></i></button>
+                    <div class="cart-header d-none d-md-flex">
+                        <h2>Produk dalam Keranjang</h2>
+                        <div class="cart-header-actions">
+                            <span class="item-count">(<span id="total-items">0</span> item)</span>
+                            <button class="clear-cart-btn-header" id="clear-cart-header">
+                                <i class="las la-trash"></i>
+                            </button>
                         </div>
                     </div>
-
-                    <div class="cart-item">
-                        <div class="item-image">
-                            <img src="images/bottoms/bottom1.png" alt="Classic Jeans">
+                    
+                    <!-- Empty Cart State -->
+                    <div class="empty-cart" id="empty-cart" style="display: none;">
+                        <div class="empty-cart-icon">
+                            <i class="las la-shopping-cart"></i>
                         </div>
-                        <div class="item-details">
-                            <h3>Classic Jeans</h3>
-                            <p class="item-category">Kategori: Bottoms</p>
-                            <p class="item-size">Ukuran: L</p>
-                            <p class="item-color">Warna: Biru</p>
-                        </div>
-                        <div class="item-quantity">
-                            <button class="quantity-btn minus"><i class="fas fa-minus"></i></button>
-                            <input type="number" value="1" min="1" max="10" class="quantity-input">
-                            <button class="quantity-btn plus"><i class="fas fa-plus"></i></button>
-                        </div>
-                        <div class="item-price">Rp 250.000</div>
-                        <div class="item-remove">
-                            <button class="remove-btn"><i class="fas fa-trash"></i></button>
-                        </div>
+                        <h3>Keranjang Belanja Anda Kosong</h3>
+                        <p>Sepertinya Anda belum menambahkan produk apapun ke keranjang.</p>
+                        <a href="shop.html" class="shop-now-btn">Belanja Sekarang</a>
                     </div>
 
-                    <div class="cart-actions">
-                        <div class="coupon-form">
-                            <input type="text" placeholder="Kode Kupon" class="coupon-input">
-                            <button class="apply-coupon">Terapkan</button>
+                    <!-- Cart Items Container -->
+                    <div class="cart-items-list" id="cart-items-list">
+                        <!-- Cart items will be dynamically inserted here -->
+                    </div>
+
+                    <!-- Cart Actions -->
+                    <div class="cart-actions" id="cart-actions" style="display: none;">
+                        <div class="coupon-section">
+                            <div class="coupon-form">
+                                <input type="text" placeholder="Masukkan kode kupon" class="coupon-input" id="coupon-input">
+                                <button class="apply-coupon" id="apply-coupon">
+                                    <i class="las la-tag"></i>
+                                    Terapkan
+                                </button>
+                            </div>
                         </div>
-                        <button class="update-cart">Perbarui Keranjang</button>
+                        <div class="cart-action-buttons">
+                        
+                            <button class="update-cart" id="update-cart">
+                                <i class="las la-sync"></i>
+                                Perbarui Keranjang
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="cart-summary">
+                <!-- Cart Summary -->
+                <div class="cart-summary" id="cart-summary" style="display: none;">
                     <h2>Ringkasan Pesanan</h2>
                     
-                    <div class="summary-item">
-                        <span>Subtotal</span>
-                        <span>Rp 400.000</span>
-                    </div>
-                    <div class="summary-item">
-                        <span>Diskon</span>
-                        <span>- Rp 0</span>
-                    </div>
-                    <div class="summary-item">
-                        <span>Pengiriman</span>
-                        <span>Rp 20.000</span>
-                    </div>
-                    <div class="summary-item total">
-                        <span>Total</span>
-                        <span>Rp 420.000</span>
+                    <div class="summary-details">
+                        <div class="summary-item">
+                            <span>Subtotal (<span id="summary-items">0</span> item)</span>
+                            <span id="subtotal-amount">Rp 0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Diskon</span>
+                            <span id="discount-amount">- Rp 0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Ongkos Kirim</span>
+                            <span id="shipping-amount">Rp 20.000</span>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-item total">
+                            <span>Total</span>
+                            <span id="total-amount">Rp 20.000</span>
+                        </div>
                     </div>
 
-                   <a href="checkout.html" class="checkout-btn">Lanjutkan ke Checkout</a>
+                    <button class="checkout-btn" id="checkout-btn">
+                        <i class="las la-credit-card"></i>
+                        Lanjutkan ke Checkout
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer>
+    <!-- Mobile Checkout Bar -->
+    <div class="mobile-checkout-bar" id="mobile-checkout-bar" style="display: none;">
+        <div class="mobile-total">
+            <div class="total-label">Total</div>
+            <div class="total-price" id="mobile-total-price">Rp 0</div>
+        </div>
+        <button class="mobile-checkout-btn" id="mobile-checkout-btn">
+            Checkout (<span id="mobile-item-count">0</span>)
+        </button>
+    </div>
+
+    <!-- Footer - Hidden on Mobile -->
+    <footer class="desktop-footer">
         <div class="container">
             <div class="footer-container">
                 <div class="footer-col">
                     <h3>Ameza Fashion</h3>
                     <p>Definisikan gaya Anda dengan koleksi pakaian berkualitas tinggi dan personal dari Ameza Fashion.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="lab la-facebook-f"></i></a>
+                        <a href="#"><i class="lab la-twitter"></i></a>
+                        <a href="#"><i class="lab la-instagram"></i></a>
+                        <a href="#"><i class="lab la-pinterest"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -170,9 +186,9 @@
                 <div class="footer-col">
                     <h3>Kontak</h3>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> Jl. Fashion No. 123, Jakarta</li>
-                        <li><i class="fas fa-phone"></i> +62 123 4567 890</li>
-                        <li><i class="fas fa-envelope"></i> info@amezafashion.com</li>
+                        <li><i class="las la-map-marker"></i> Jl. Fashion No. 123, Jakarta</li>
+                        <li><i class="las la-phone"></i> +62 123 4567 890</li>
+                        <li><i class="las la-envelope"></i> info@amezafashion.com</li>
                     </ul>
                 </div>
             </div>
@@ -181,38 +197,32 @@
             </div>
         </div>
     </footer>
-    
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('.mobile-menu-container').classList.toggle('active');
-        });
 
-        // Quantity buttons
-        document.querySelectorAll('.quantity-btn.plus').forEach(button => {
-            button.addEventListener('click', function() {
-                let input = this.parentNode.querySelector('.quantity-input');
-                input.value = parseInt(input.value) + 1;
-            });
-        });
+    <div class="custom-modal" id="clear-cart-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">
+                <i class="las la-times"></i>
+            </button>
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i class="las la-exclamation-triangle"></i>
+                </div>
+                <div class="modal-text">
+                    <div class="modal-title">Kosongkan keranjang belanja?</div>
+                    <div class="modal-subtitle">Semua produk akan dihapus dari keranjang Anda</div>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-primary" id="confirm-clear">
+                    Ya, Kosongkan
+                </button>
+                <button class="modal-btn modal-btn-secondary" id="cancel-clear">
+                    Batal
+                </button>
+            </div>
+        </div>
+    </div>
 
-        document.querySelectorAll('.quantity-btn.minus').forEach(button => {
-            button.addEventListener('click', function() {
-                let input = this.parentNode.querySelector('.quantity-input');
-                if (parseInt(input.value) > 1) {
-                    input.value = parseInt(input.value) - 1;
-                }
-            });
-        });
-
-        // Remove item
-        document.querySelectorAll('.remove-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                this.closest('.cart-item').remove();
-            });
-        });
-    </script>
+    <script src="JS/cart.js"></script>
 </body>
 </html>
