@@ -21,8 +21,8 @@ class OrdersManager {
     if (!this.currentUser) {
       // For demo purposes, create a demo user
       this.currentUser = {
-        firstName: "Demo",
-        lastName: "User",
+        firstName: "User",
+      
         email: "demo@amezafashion.com",
         avatar: "/placeholder.svg?height=80&width=80",
       }
@@ -35,7 +35,7 @@ class OrdersManager {
 
     // Update user info in sidebar and mobile
     const elements = {
-      "user-name": `${this.currentUser.firstName || ""} ${this.currentUser.lastName || ""}`.trim() || "Demo User",
+      "user-name": `${this.currentUser.firstName || ""} ${this.currentUser.lastName || ""}`.trim() || "User",
       "user-email": this.currentUser.email || "demo@amezafashion.com",
       "mobile-user-name":
         `${this.currentUser.firstName || ""} ${this.currentUser.lastName || ""}`.trim() || "Demo User",

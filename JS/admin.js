@@ -479,6 +479,7 @@ class AdminDashboard {
           password: "admin123",
           role: "admin",
           createdAt: "2023-01-01",
+          verified: true,
           avatar: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-REHji32IhsEiv5DZx5FrCe2YXRMvpW.png",
           bio: "Administrator sistem Ameza Fashion",
         },
@@ -491,6 +492,7 @@ class AdminDashboard {
           password: "user123",
           role: "user",
           createdAt: "2023-01-15",
+          verified: false,
         },
         {
           id: 3,
@@ -519,7 +521,7 @@ class AdminDashboard {
     // Load current user
     const currentUser = JSON.parse(localStorage.getItem("ameza_current_user"))
     if (currentUser) {
-      const userNameElement = document.getElementById("userName")
+      const userNameElement = document.getElementById("Admin")
       if (userNameElement) {
         userNameElement.textContent = `${currentUser.firstName} ${currentUser.lastName}`
       }
@@ -651,18 +653,16 @@ class AdminDashboard {
         </td>
         <td>${new Date(user.createdAt).toLocaleDateString("id-ID")}</td>
         <td>
-          <button class="btn btn-sm" onclick="adminDashboard.editUser(${user.id})">
-            <i class="las la-edit"></i>
-          </button>
-          <button class="btn btn-sm btn-danger" onclick="adminDashboard.deleteUser(${user.id})">
-            <i class="las la-trash"></i>
-          </button>
-        </td>
+        <button class="btn-verify ${user.verified ? 'verified' : ''}" data-user-id="${user.id}" ${user.verified ? 'disabled' : ''}>
+          <i class="las ${user.verified ? 'la-check-circle' : 'la-check'}"></i>
+        </button>
+      </td>
       `
       tbody.appendChild(row)
     })
   }
 
+  
   loadRecentTransactions() {
     const container = document.getElementById("recent-transactions-list")
     if (!container) return
@@ -895,46 +895,61 @@ class AdminDashboard {
   }
 
   // Transaction Management
-  openTransactionModal(transactionId = null) {
-    const modal = document.getElementById("transaction-modal")
-    const title = document.getElementById("transaction-modal-title")
-    const form = document.getElementById("transaction-form")
+openTransactionModal(transactionId = null) {
+  const modal = document.getElementById("transaction-modal")
+  const title = document.getElementById("transaction-modal-title")
+  const form = document.getElementById("transaction-form")
 
-    if (transactionId) {
-      const transaction = this.transactions.find((t) => t.id === transactionId)
-      if (transaction) {
-        title.textContent = "Edit Transaksi"
-        document.getElementById("transaction-id").value = transaction.transactionId
-        document.getElementById("transaction-customer").value = transaction.customer
-        document.getElementById("transaction-customer-email").value = transaction.customerEmail
-        document.getElementById("transaction-customer-phone").value = transaction.customerPhone
-        document.getElementById("transaction-products").value = transaction.products
-        document.getElementById("transaction-quantity").value = transaction.quantity
-        document.getElementById("transaction-total").value = transaction.total
-        document.getElementById("transaction-payment-method").value = transaction.paymentMethod
-        document.getElementById("transaction-status").value = transaction.status
-        document.getElementById("transaction-date").value = transaction.date
-        document.getElementById("transaction-address").value = transaction.address
-        document.getElementById("transaction-notes").value = transaction.notes || ""
-        this.editingTransactionId = transactionId
-      }
-    } else {
-      title.textContent = "Tambah Transaksi"
-      form.reset()
-      document.getElementById("transaction-date").value = new Date().toISOString().split("T")[0]
-      this.editingTransactionId = null
+  if (transactionId) {
+    const transaction = this.transactions.find((t) => t.id === transactionId)
+    if (transaction) {
+      title.textContent = "Edit Status Transaksi"
+      document.getElementById("transaction-id").value = transaction.transactionId
+      document.getElementById("transaction-customer").value = transaction.customer
+      document.getElementById("transaction-customer-email").value = transaction.customerEmail
+      document.getElementById("transaction-customer-phone").value = transaction.customerPhone
+      document.getElementById("transaction-products").value = transaction.products
+      document.getElementById("transaction-quantity").value = transaction.quantity
+      document.getElementById("transaction-total").value = transaction.total
+      document.getElementById("transaction-payment-method").value = transaction.paymentMethod
+      document.getElementById("transaction-status").value = transaction.status
+      document.getElementById("transaction-date").value = transaction.date
+      document.getElementById("transaction-address").value = transaction.address
+      document.getElementById("transaction-notes").value = transaction.notes || ""
+
+      // Buat semua field selain status jadi readonly / disabled
+      form.querySelectorAll("input, textarea, select").forEach((el) => {
+        if (el.id !== "transaction-status") {
+          el.setAttribute("readonly", true)
+          el.setAttribute("disabled", true)
+        }
+      })
+
+      this.editingTransactionId = transactionId
     }
-
-    modal.classList.add("active")
-  }
-
-  closeTransactionModal() {
-    const modal = document.getElementById("transaction-modal")
-    modal.classList.remove("active")
+  } else {
+    title.textContent = "Tambah Transaksi"
+    form.reset()
+    document.getElementById("transaction-date").value = new Date().toISOString().split("T")[0]
+    form.querySelectorAll("input, textarea, select").forEach((el) => {
+      el.removeAttribute("readonly")
+      el.removeAttribute("disabled")
+    })
     this.editingTransactionId = null
   }
 
-  saveTransaction() {
+  modal.classList.add("active")
+}
+
+ saveTransaction() {
+  const status = document.getElementById("transaction-status").value
+
+  if (this.editingTransactionId) {
+    const index = this.transactions.findIndex((t) => t.id === this.editingTransactionId)
+    if (index !== -1) {
+      this.transactions[index].status = status
+    }
+  } else {
     const transactionId = document.getElementById("transaction-id").value
     const customer = document.getElementById("transaction-customer").value
     const customerEmail = document.getElementById("transaction-customer-email").value
@@ -943,7 +958,6 @@ class AdminDashboard {
     const quantity = Number.parseInt(document.getElementById("transaction-quantity").value)
     const total = Number.parseInt(document.getElementById("transaction-total").value)
     const paymentMethod = document.getElementById("transaction-payment-method").value
-    const status = document.getElementById("transaction-status").value
     const date = document.getElementById("transaction-date").value
     const address = document.getElementById("transaction-address").value
     const notes = document.getElementById("transaction-notes").value
@@ -963,25 +977,19 @@ class AdminDashboard {
       notes,
     }
 
-    if (this.editingTransactionId) {
-      // Update existing transaction
-      const index = this.transactions.findIndex((t) => t.id === this.editingTransactionId)
-      if (index !== -1) {
-        this.transactions[index] = { ...this.transactions[index], ...transactionData }
-      }
-    } else {
-      // Add new transaction
-      const newId = Math.max(...this.transactions.map((t) => t.id), 0) + 1
-      this.transactions.push({ id: newId, ...transactionData })
-    }
-
-    this.saveTransactions()
-    this.loadTransactions()
-    this.loadRecentTransactions()
-    this.updateStats()
-    this.closeTransactionModal()
-    this.showNotification("Transaksi berhasil disimpan!", "success")
+    const newId = Math.max(...this.transactions.map((t) => t.id), 0) + 1
+    this.transactions.push({ id: newId, ...transactionData })
   }
+
+  this.saveTransactions()
+  this.loadTransactions()
+  this.loadRecentTransactions()
+  this.updateStats()
+  this.closeTransactionModal()
+  this.showNotification("Status transaksi berhasil diperbarui!", "success")
+}
+
+  
 
   editTransaction(id) {
     this.openTransactionModal(id)

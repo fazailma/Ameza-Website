@@ -50,21 +50,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" data-page="customers">
-                            <i class="las la-users"></i>
-                            <span>Pelanggan</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a href="#" data-page="users">
                             <i class="las la-user-shield"></i>
                             <span>Pengguna</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" data-page="settings">
-                            <i class="las la-cog"></i>
-                            <span>Pengaturan</span>
                         </a>
                     </li>
                 </ul>
@@ -93,11 +81,11 @@
                 </div>
                 <div class="user-info">
                     <span id="userName">Admin User</span>
-                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-REHji32IhsEiv5DZx5FrCe2YXRMvpW.png" alt="User Avatar" class="avatar">
+                    <img src="https://i.pinimg.com/736x/57/5d/cf/575dcf496fce15721ca1df69db1909ee.jpg" alt="User Avatar" class="avatar">
                     <div class="user-dropdown">
                         <ul>
                             <li><a href="#" id="editProfileBtn"><i class="las la-user"></i> Edit Profil</a></li>
-                            <li><a href="#"><i class="las la-cog"></i> Pengaturan</a></li>
+                            <li><a href="index.html"><i class="las la-retweet"></i> Mode User</a></li>
                             <li><a href="#" id="logoutBtnDropdown"><i class="las la-sign-out-alt"></i> Logout</a></li>
                         </ul>
                     </div>
@@ -133,15 +121,6 @@
                             <div class="stat-info">
                                 <h3 id="total-transactions">0</h3>
                                 <p>Total Transaksi</p>
-                            </div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon">
-                                <i class="las la-users"></i>
-                            </div>
-                            <div class="stat-info">
-                                <h3 id="total-customers">0</h3>
-                                <p>Total Pelanggan</p>
                             </div>
                         </div>
                     </div>
@@ -292,52 +271,6 @@
                                     <!-- Users will be loaded here -->
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Customers Page -->
-                <div id="customers-page" class="page-content">
-                    <div class="page-header">
-                        <h2>Kelola Pelanggan</h2>
-                    </div>
-                    <div class="table-container">
-                        <div class="table-responsive">
-                            <table class="data-table">
-                                <thead>
-                                    <tr>
-                                        <th>Nama</th>
-                                        <th>Email</th>
-                                        <th>Telepon</th>
-                                        <th>Total Pesanan</th>
-                                        <th>Bergabung</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="customers-table-body">
-                                    <!-- Customers will be loaded here -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Settings Page -->
-                <div id="settings-page" class="page-content">
-                    <div class="page-header">
-                        <h2>Pengaturan</h2>
-                    </div>
-                    <div class="settings-content">
-                        <div class="settings-card">
-                            <h3>Pengaturan Umum</h3>
-                            <p>Konfigurasi pengaturan dasar aplikasi</p>
-                        </div>
-                        <div class="settings-card">
-                            <h3>Pengaturan Email</h3>
-                            <p>Konfigurasi pengaturan email dan notifikasi</p>
-                        </div>
-                        <div class="settings-card">
-                            <h3>Pengaturan Pembayaran</h3>
-                            <p>Konfigurasi metode pembayaran</p>
                         </div>
                     </div>
                 </div>
@@ -619,5 +552,109 @@
     <script src="../JS/auth.js"></script>
     <script src="../JS/auth-check.js"></script>
     <script src="JS/admin.js"></script>
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Warna tema soft
+    const softColors = ['#A7C7E7', '#D4A5A5', '#F5D7A1', '#C1E1C1'];
+
+    // Penjualan Mingguan (Line Chart)
+    const salesChartCtx = document.getElementById('salesChart').getContext('2d');
+    new Chart(salesChartCtx, {
+        type: 'line',
+        data: {
+            labels: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'],
+            datasets: [{
+                label: 'Penjualan',
+                data: [12, 19, 3, 5, 2, 3, 7],
+                backgroundColor: 'rgba(167, 199, 231, 0.3)',
+                borderColor: '#A7C7E7',
+                borderWidth: 2,
+                pointBackgroundColor: '#A7C7E7'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            }
+        }
+    });
+
+    // Kategori Produk (Bar Chart) — sudah diganti label
+    const categoryChartCtx = document.getElementById('categoryChart').getContext('2d');
+    new Chart(categoryChartCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Baju', 'Celana', 'Rok', 'Dress'],
+            datasets: [{
+                label: 'Jumlah Produk',
+                data: [10, 15, 7, 5],
+                backgroundColor: softColors,
+                borderColor: '#e0e0e0',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+
+    // Status Transaksi (Doughnut Chart)
+    const statusChartCtx = document.getElementById('statusChart').getContext('2d');
+    new Chart(statusChartCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Sukses', 'Gagal', 'Diproses'],
+            datasets: [{
+                label: 'Status',
+                data: [65, 10, 25],
+                backgroundColor: ['#B5EAD7', '#FFDAC1', '#C7CEEA']
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: '#333',
+                        padding: 15
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+<script>function attachVerifyListeners() {
+  document.querySelectorAll('.btn-verify').forEach(button => {
+    button.addEventListener('click', function () {
+      const userId = this.getAttribute('data-user-id');
+
+      // Update status di data JS
+      const user = users.find(u => u.id == userId);
+      if (user && !user.verified) {
+        user.verified = true;
+
+        // Ubah tampilan tombol
+        this.classList.add('verified');
+        this.innerHTML = '<i class="las la-check-circle"></i>';
+        this.disabled = true;
+
+        alert(`User ID ${userId} berhasil diverifikasi!`);
+
+        // (Opsional) Kirim update ke server di sini
+      }
+    });
+  });
+}
+</script>
+
 </body>
 </html>

@@ -97,12 +97,48 @@ a {
   z-index: 1000;
 }
 
+/* Navbar layout fix */
 .navbar-custom {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
+  position: relative;
   padding: 15px 0;
 }
+
+/* Logo diposisikan absolut di tengah */
+.navbar-custom .logo {
+  position: absolute;
+  left: 8%;
+  transform: translateX(-50%);
+}
+
+/* Jaga posisi back button tetap di kiri */
+.navbar-custom .back-btn {
+  margin-right: auto;
+  font-size: 1.2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--dark-text);
+}
+
+/* Nav links tetap di tengah layout */
+.navbar-custom .nav-links {
+  margin: 0 auto;
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+/* Header icons tetap kanan */
+.navbar-custom .header-icons {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 
 .logo a {
   font-size: 1.8rem;
@@ -960,68 +996,77 @@ a {
   color: var(--white);
 }
 
-/* FOOTER */
+/* FOOTER - PERBAIKAN STYLING */
 footer {
   background-color: var(--primary);
   color: var(--white);
   padding: 60px 0 20px;
+  margin-top: 60px;
 }
 
 .footer-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
   margin-bottom: 40px;
+  align-items: start;
 }
 
 .footer-col h3 {
   font-size: 1.2rem;
   margin-bottom: 20px;
   font-weight: 600;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .footer-col p {
   color: rgba(255, 255, 255, 0.8);
   margin-bottom: 20px;
   line-height: 1.6;
+  font-size: 0.95rem;
 }
 
 .social-links {
   display: flex;
   gap: 15px;
+  margin-top: 20px;
 }
 
 .social-links a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 40px;
   height: 40px;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
-  color: var(--white);
-  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: var(--transition);
+  color: var(--white);
 }
 
 .social-links a:hover {
-  background-color: var(--white);
-  color: var(--primary);
+  background-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-3px);
 }
 
 .footer-col ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .footer-col ul li {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .footer-col ul li a {
   color: rgba(255, 255, 255, 0.8);
   transition: var(--transition);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
 }
 
 .footer-col ul li a:hover {
@@ -1032,37 +1077,19 @@ footer {
 .footer-col ul li i {
   margin-right: 10px;
   color: rgba(255, 255, 255, 0.6);
+  width: 20px;
+  text-align: center;
+  font-size: 1rem;
 }
 
 .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 20px;
   text-align: center;
-}
-
-.footer-bottom p {
-  color: rgba(255, 255, 255, 0.8);
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
   font-size: 0.9rem;
 }
 
-/* RESPONSIVE STYLES */
-@media (max-width: 992px) {
-  .blog-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .related-posts .blog-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .form-row {
-    grid-template-columns: 1fr;
-  }
-
-  .footer-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
 
 @media (max-width: 768px) {
   /* MOBILE OPTIMIZATIONS */

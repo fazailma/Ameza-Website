@@ -894,45 +894,42 @@ header {
   color: var(--primary);
 }
 
-/* Footer */
+/* FOOTER - PERBAIKAN STYLING */
 footer {
   background-color: var(--primary);
   color: var(--white);
-  padding: 80px 0 20px;
-}
-
-.footer-wrapper {
-  width: 100%;
-  max-width: none;
+  padding: 60px 0 20px;
+  margin-top: 60px;
 }
 
 .footer-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 40px;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
+  align-items: start;
 }
 
 .footer-col h3 {
   font-size: 1.2rem;
   margin-bottom: 20px;
-  position: relative;
-  font-weight: 400;
-  letter-spacing: 2px;
+  font-weight: 600;
+  color: var(--white);
   text-transform: uppercase;
-  padding-bottom: 10px;
+  letter-spacing: 1px;
 }
 
 .footer-col p {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.8);
   margin-bottom: 20px;
-  font-size: 1.1rem;
-  line-height: 1.8;
+  line-height: 1.6;
+  font-size: 0.95rem;
 }
 
 .social-links {
   display: flex;
   gap: 15px;
+  margin-top: 20px;
 }
 
 .social-links a {
@@ -943,7 +940,8 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s;
+  transition: var(--transition);
+  color: var(--white);
 }
 
 .social-links a:hover {
@@ -951,39 +949,43 @@ footer {
   transform: translateY(-3px);
 }
 
-.footer-links {
+.footer-col ul {
   list-style: none;
-  padding-left: 0;
+  padding: 0;
+  margin: 0;
 }
 
-.footer-links li {
-  margin-bottom: 15px;
+.footer-col ul li {
+  margin-bottom: 12px;
 }
 
-.footer-links li a {
-  color: rgba(255, 255, 255, 0.7);
-  transition: all 0.3s;
-  position: relative;
-  padding-left: 0;
+.footer-col ul li a {
+  color: rgba(255, 255, 255, 0.8);
+  transition: var(--transition);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
 }
 
-.footer-links li a:hover {
+.footer-col ul li a:hover {
   color: var(--white);
   padding-left: 5px;
 }
 
-.footer-links li i {
+.footer-col ul li i {
   margin-right: 10px;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.6);
   width: 20px;
   text-align: center;
+  font-size: 1rem;
 }
 
 .footer-bottom {
   text-align: center;
-  padding-top: 20px;
+  padding-top: 30px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
 }
 
 /* Cart Notification - Centered */
