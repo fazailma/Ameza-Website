@@ -225,7 +225,7 @@ class AdminDashboard {
   logout() {
     if (confirm("Apakah Anda yakin ingin keluar?")) {
       localStorage.removeItem("ameza_current_user")
-      window.location.href = "../login.html"
+      window.location.href = "login.html"
     }
   }
 
